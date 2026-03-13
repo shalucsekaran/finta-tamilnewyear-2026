@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FINTA - Tamil New Year & Ramzan 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+  :root {
+    --saffron: #FF6B00; --saffron-light: #FFF3E8; --saffron-dark: #CC5500;
+    --crimson: #C0392B; --crimson-light: #FDECEA;
+    --gold: #D4AF37; --gold-light: #FDF8E1;
+    --green: #1A7A4A; --green-light: #E8F5EE;
+    --bg: #FDFAF5; --card: #FFFFFF; --border: #E8DDD0;
+    --text: #2C1810; --text-muted: #7A5C4E;
+    --radius: 12px; --shadow: 0 2px 12px rgba(180,100,20,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); }
+
+  .header { background: linear-gradient(135deg, #8B0000 0%, #C0392B 40%, #FF6B00 100%); position: relative; overflow: hidden; }
+  .header::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(45deg,transparent,transparent 20px,rgba(255,255,255,0.03) 20px,rgba(255,255,255,0.03) 40px); }
+  .header-top { background: #6B0000; padding: 6px 0; text-align: center; font-size: 12px; color: #FFD700; letter-spacing: 2px; }
+  .header-content { padding: 20px 20px 24px; text-align: center; position: relative; z-index: 1; }
+  .logo-wrap { display: flex; justify-content: center; margin-bottom: 12px; }
+  .logo-wrap img { width: 88px; height: 88px; border-radius: 50%; border: 3px solid #FFD700; box-shadow: 0 0 0 4px rgba(255,215,0,0.25); object-fit: cover; background: #fff; }
+  .kolam-row { font-size: 22px; margin-bottom: 10px; letter-spacing: 4px; opacity: 0.9; }
+  .org-name { font-size: 13px; font-weight: 500; color: rgba(255,220,150,0.95); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px; }
+  .event-title { font-size: 26px; font-weight: 700; color: #fff; line-height: 1.2; text-shadow: 0 2px 8px rgba(0,0,0,0.3); margin-bottom: 4px; }
+  .event-subtitle { font-size: 14px; color: #FFD700; font-weight: 500; margin-bottom: 16px; }
+  .header-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .badge { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,215,0,0.4); border-radius: 20px; padding: 5px 14px; font-size: 12px; color: #FFE9A0; }
+
+  .progress-bar { background: #fff; padding: 16px 20px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .steps { display: flex; align-items: center; justify-content: center; max-width: 500px; margin: 0 auto; }
+  .step { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
+  .step-circle { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; background: var(--saffron); color: #fff; border: 2px solid var(--saffron); }
+  .step-label { font-size: 10px; color: var(--saffron); font-weight: 500; text-align: center; }
+  .step-line { flex: 1; height: 2px; background: var(--saffron); margin: 0 4px; margin-bottom: 14px; }
+
+  .form-container { max-width: 680px; margin: 0 auto; padding: 20px 16px 40px; }
+  .section-card { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); margin-bottom: 16px; overflow: hidden; }
+  .section-header { padding: 14px 18px; background: linear-gradient(90deg, var(--saffron-light), #fff); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+  .section-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--saffron); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+  .section-title { font-size: 15px; font-weight: 600; color: var(--saffron-dark); }
+  .section-body { padding: 18px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field label { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .field input { padding: 10px 13px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; font-family: 'Poppins', sans-serif; color: var(--text); background: var(--bg); outline: none; transition: border-color 0.2s; }
+  .field input:focus { border-color: var(--saffron); box-shadow: 0 0 0 3px rgba(255,107,0,0.12); }
+  .field input::placeholder { color: #BBA898; }
+  .required { color: var(--crimson); }
+  .char-tip { font-size: 11px; color: #BBA898; }
+
+  .counter-group { display: flex; flex-direction: column; gap: 10px; }
+  .counter-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; }
+  .counter-info { flex: 1; }
+  .counter-label { font-size: 13px; font-weight: 600; color: var(--text); }
+  .counter-price { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+  .counter-controls { display: flex; align-items: center; gap: 10px; }
+  .counter-btn { width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid var(--saffron); background: #fff; color: var(--saffron); font-size: 18px; font-weight: 600; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+  .counter-btn:hover { background: var(--saffron); color: #fff; }
+  .counter-val { font-size: 16px; font-weight: 700; min-width: 24px; text-align: center; }
+
+  .info-box { background: var(--gold-light); border: 1px solid #E8D070; border-radius: 8px; padding: 11px 14px; margin-top: 12px; font-size: 12px; color: #7A6010; line-height: 1.6; }
+  .info-box strong { color: #5A4308; }
+
+  .kids-food-section { margin-top: 14px; }
+  .food-section-title { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px dashed var(--border); }
+  .kid-food-row { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; }
+  .kid-food-label { font-size: 12px; font-weight: 600; color: var(--saffron-dark); margin-bottom: 8px; }
+
+  .food-item { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 6px; border: 1.5px solid var(--border); background: #fff; margin-bottom: 6px; cursor: pointer; }
+  .food-item.selected { border-color: var(--saffron); background: var(--saffron-light); }
+  .food-item .fcheck { width: 20px; height: 20px; border-radius: 4px; border: 2px solid #ccc; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; color: #fff; }
+  .food-item.selected .fcheck { background: var(--saffron); border-color: var(--saffron); }
+  .food-item .fname { font-size: 13px; color: var(--text); flex: 1; }
+  .food-item .fprice { font-size: 12px; font-weight: 600; color: var(--saffron-dark); }
+
+  .attendee-group { margin-bottom: 14px; }
+  .attendee-group-title { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px dashed var(--border); }
+  .attendee-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px; }
+  @media (max-width: 480px) { .attendee-row { grid-template-columns: 1fr; } }
+  .attendee-label { font-size: 11px; font-weight: 600; color: var(--saffron-dark); margin-bottom: 5px; } background: #FFF3CD; border: 1.5px solid #FFB800; border-radius: 8px; padding: 12px 14px; margin-bottom: 14px; display: flex; gap: 10px; align-items: flex-start; }
+  .warn-icon { font-size: 18px; flex-shrink: 0; }
+  .warn-text { font-size: 12px; color: #7A5500; line-height: 1.6; }
+  .warn-text strong { color: #5A3D00; font-size: 13px; }
+  .payment-options { display: flex; flex-direction: column; gap: 8px; }
+  .pay-option { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; background: var(--bg); }
+  .pay-option.selected { border-color: var(--saffron); background: var(--saffron-light); }
+  .pay-label { font-size: 13px; font-weight: 600; color: var(--text); }
+  .pay-desc { font-size: 11px; color: var(--text-muted); }
+  .voucher-options { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+  .voucher-chip { padding: 4px 12px; border-radius: 20px; border: 1.5px solid var(--border); font-size: 11px; font-weight: 600; cursor: pointer; background: #fff; color: var(--text); }
+  .voucher-chip.selected { background: var(--saffron); color: #fff; border-color: var(--saffron); }
+
+  .upload-area { border: 2px dashed #D4A870; border-radius: 10px; padding: 24px 16px; text-align: center; cursor: pointer; background: #FFFBF5; }
+  .upload-area:hover { border-color: var(--saffron); background: var(--saffron-light); }
+  .upload-icon { font-size: 28px; margin-bottom: 8px; }
+  .upload-text { font-size: 13px; color: var(--text-muted); }
+  .upload-text strong { color: var(--saffron-dark); }
+  .file-list { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .file-chip { display: flex; align-items: center; gap: 6px; background: var(--green-light); border: 1px solid #8EC9A8; border-radius: 20px; padding: 4px 10px; font-size: 11px; color: var(--green); font-weight: 500; }
+  .file-remove { cursor: pointer; color: var(--crimson); font-size: 14px; }
+
+  .summary-card { background: #fff; border: 1.5px solid var(--saffron); border-radius: var(--radius); padding: 14px 18px; box-shadow: 0 4px 20px rgba(255,107,0,0.15); margin-top: 8px; }
+  .summary-title { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .summary-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); margin-bottom: 4px; }
+  .summary-row.total { font-size: 16px; font-weight: 700; color: var(--text); border-top: 1px solid var(--border); padding-top: 8px; margin-top: 4px; }
+  .summary-row.total span:last-child { color: var(--saffron-dark); }
+
+  .submit-btn { width: 100%; padding: 15px; margin-top: 16px; background: linear-gradient(135deg, var(--crimson), var(--saffron)); color: #fff; border: none; border-radius: var(--radius); font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 16px rgba(200,50,20,0.25); }
+  .submit-btn:hover { opacity: 0.92; }
+  .success-screen { display: none; text-align: center; padding: 60px 20px; }
+  .success-icon { font-size: 60px; margin-bottom: 16px; }
+  .success-title { font-size: 22px; font-weight: 700; color: var(--green); margin-bottom: 8px; }
+  .success-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">✦ FINLAND TAMIL SANGAM ry ✦</div>
+  <div class="header-content">
+    <div class="logo-wrap">
+      <img src="https://i.postimg.cc/q79kgDYK/IMG-2861.png" alt="FINTA Logo" onerror="this.style.display='none'" />
+    </div>
+    <div class="kolam-row">🪷 ☪️ 🪷</div>
+    <div class="org-name">Finland Tamil Sangam</div>
+    <div class="event-title">Tamil New Year &amp;<br>Ramzan 2026 Celebration</div>
+    <div class="event-subtitle">தமிழ் புத்தாண்டு · ரம்ஜான் முபாரக்</div>
+    <div class="header-badges">
+      <span class="badge">📅 Register Now</span>
+      <span class="badge">🎉 Food Included</span>
+      <span class="badge">👨‍👩‍👧‍👦 Family Event</span>
+    </div>
+  </div>
+</div>
+
+<div class="progress-bar">
+  <div class="steps">
+    <div class="step"><div class="step-circle">1</div><div class="step-label">Details</div></div>
+    <div class="step-line"></div>
+    <div class="step"><div class="step-circle">2</div><div class="step-label">Tickets</div></div>
+    <div class="step-line"></div>
+    <div class="step"><div class="step-circle">3</div><div class="step-label">Payment</div></div>
+    <div class="step-line"></div>
+    <div class="step"><div class="step-circle">4</div><div class="step-label">Confirm</div></div>
+  </div>
+</div>
+
+<div class="form-container" id="main-form">
+
+  <!-- Personal Info -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-icon">👤</div>
+      <div><div class="section-title">Personal Information</div><div class="char-tip">Your contact details</div></div>
+    </div>
+    <div class="section-body">
+      <div class="form-row">
+        <div class="field"><label>First Name <span class="required">*</span></label><input type="text" id="fname" placeholder="e.g. Priya" /></div>
+        <div class="field"><label>Last Name <span class="required">*</span></label><input type="text" id="lname" placeholder="e.g. Kumar" /></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label>Email Address <span class="required">*</span></label><input type="email" id="email" placeholder="you@email.com" /></div>
+        <div class="field"><label>Phone Number <span class="required">*</span></label><input type="tel" id="phone" placeholder="+358 40 123 4567" /></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tickets -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-icon">🎟️</div>
+      <div><div class="section-title">Tickets &amp; Attendees</div><div class="char-tip">Select number of attendees</div></div>
+    </div>
+    <div class="section-body">
+      <div class="counter-group">
+        <div class="counter-item">
+          <div class="counter-info"><div class="counter-label">Adults (18+)</div><div class="counter-price">€13 per person</div></div>
+          <div class="counter-controls">
+            <button class="counter-btn" onclick="changeCount('adults',-1)">−</button>
+            <span class="counter-val" id="adults-val">0</span>
+            <button class="counter-btn" onclick="changeCount('adults',1)">+</button>
+          </div>
+        </div>
+        <div class="counter-item">
+          <div class="counter-info"><div class="counter-label">Children age 8–17</div><div class="counter-price">€10 — food only · Free entry</div></div>
+          <div class="counter-controls">
+            <button class="counter-btn" onclick="changeCount('bigkids',-1)">−</button>
+            <span class="counter-val" id="bigkids-val">0</span>
+            <button class="counter-btn" onclick="changeCount('bigkids',1)">+</button>
+          </div>
+        </div>
+        <div class="counter-item">
+          <div class="counter-info"><div class="counter-label">Children age 0–7</div><div class="counter-price">Free entry · Choose food below</div></div>
+          <div class="counter-controls">
+            <button class="counter-btn" onclick="changeCount('smallkids',-1)">−</button>
+            <span class="counter-val" id="smallkids-val">0</span>
+            <button class="counter-btn" onclick="changeCount('smallkids',1)">+</button>
+          </div>
+        </div>
+      </div>
+      <div class="info-box">
+        🍽️ <strong>Adult fee (€13):</strong> Includes a food package worth €10. Only €3 is the event entry fee.<br>
+        👦 <strong>Children 8–17:</strong> Free entry · €10 covers the same food as adults.<br>
+        👶 <strong>Children 0–7:</strong> Free entry · Select food items and pay the menu price only.
+      </div>
+      <div class="kids-food-section" id="smallkids-food" style="display:none">
+        <div class="food-section-title" style="margin-top:14px">🍱 Food selection for children (0–7)</div>
+        <div id="food-rows"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Attendee Names -->
+  <div class="section-card" id="attendees-card" style="display:none">
+    <div class="section-header">
+      <div class="section-icon">👥</div>
+      <div><div class="section-title">Attendee Names</div><div class="char-tip">Full name of each participant</div></div>
+    </div>
+    <div class="section-body" id="attendee-names"></div>
+  </div>
+
+  <!-- Payment -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-icon">💳</div>
+      <div><div class="section-title">Payment Method</div><div class="char-tip">Choose how you'll pay</div></div>
+    </div>
+    <div class="section-body">
+      <div class="payment-warning">
+        <div class="warn-icon">⚠️</div>
+        <div class="warn-text">
+          <strong>Important — Cultural Vouchers (ePassi / Edenred / Smartum)</strong><br>
+          Cultural vouchers are strictly for <strong>personal use only</strong>. You may only pay for yourself — not for other family members. Use bank transfer for others.
+        </div>
+      </div>
+      <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">You can select both if paying partly by voucher and partly by bank transfer.</div>
+      <div class="payment-options">
+        <div class="pay-option" id="pay-bank" onclick="togglePayOption('bank')">
+          <input type="checkbox" id="chk-bank" onclick="event.stopPropagation()" />
+          <div style="width:100%">
+            <div class="pay-label">🏦 Bank Transfer</div>
+            <div class="pay-desc">Transfer the amount to our bank account</div>
+            <div id="bank-details" style="display:none; margin-top:10px; background:#F0F7FF; border:1px solid #B8D4F0; border-radius:8px; padding:10px 12px;">
+              <div style="font-size:12px; color:#1A3A5C; line-height:2;">
+                <div><strong>Recipient:</strong> Finland Tamil Sangam ry</div>
+                <div style="display:flex;align-items:center;gap:6px;">
+                  <strong>IBAN:</strong> FI25 1544 3000 0023 73
+                  <span onclick="copyText('FI2515443000002373', this)" style="cursor:pointer;background:#1A3A5C;color:#fff;font-size:10px;padding:2px 8px;border-radius:10px;">Copy</span>
+                </div>
+                <div><strong>BIC:</strong> NDEAFIHH</div>
+                <div><strong>Reference:</strong> Will be provided by FINTA</div>
+                <div style="margin-top:6px;font-size:11px;color:#7A5C4E;border-top:1px dashed #ccc;padding-top:6px;">
+                  ⚠️ Payment must be made in advance before submitting this form. Payments are non-refundable and cannot be transferred.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pay-option" id="pay-voucher" onclick="togglePayOption('voucher')">
+          <input type="checkbox" id="chk-voucher" onclick="event.stopPropagation()" />
+          <div style="width:100%">
+            <div class="pay-label">🎫 Cultural Voucher &nbsp;<strong style="color:var(--crimson);font-size:12px;">— Personal Use Only</strong></div>
+            <div class="pay-desc">ePassi · Edenred · Smartum</div>
+            <div class="voucher-options" id="voucher-chips" style="display:none">
+              <span class="voucher-chip" id="chip-epassi" onclick="event.stopPropagation();selectVoucher('ePassi')">ePassi</span>
+              <span class="voucher-chip" id="chip-edenred" onclick="event.stopPropagation();selectVoucher('Edenred')">Edenred</span>
+              <span class="voucher-chip" id="chip-smartum" onclick="event.stopPropagation();selectVoucher('Smartum')">Smartum</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Upload -->
+  <div class="section-card">
+    <div class="section-header">
+      <div class="section-icon">📎</div>
+      <div><div class="section-title">Payment Screenshot(s)</div><div class="char-tip">Upload proof of payment</div></div>
+    </div>
+    <div class="section-body">
+      <div class="upload-area" onclick="document.getElementById('file-input').click()">
+        <div class="upload-icon">🖼️</div>
+        <div class="upload-text"><strong>Click to upload</strong> or drag &amp; drop<br>PNG, JPG, PDF accepted · Multiple files OK</div>
+      </div>
+      <input type="file" id="file-input" multiple accept="image/*,application/pdf" style="display:none" onchange="handleFiles(event)" />
+      <div class="file-list" id="file-list"></div>
+    </div>
+  </div>
+
+  <!-- Summary -->
+  <div class="summary-card">
+    <div class="summary-title">Order Summary</div>
+    <div id="summary-rows"><div class="summary-row"><span style="color:#BBA898">No attendees selected yet</span></div></div>
+  </div>
+
+  <button class="submit-btn" onclick="submitForm()">🎉 Complete Registration</button>
+</div>
+
+<div class="success-screen" id="success-screen">
+  <div class="success-icon">🎊</div>
+  <div class="success-title">Registration Successful!</div>
+  <div class="success-desc">Thank you for registering for the<br><strong>Tamil New Year &amp; Ramzan 2026 Celebration!</strong><br><br>A confirmation email will be sent to you shortly.<br>We look forward to celebrating with you! 🪷</div>
+</div>
+
+<script>
+var GAS_URL = "https://script.google.com/macros/s/AKfycbxD-mLMm0Fndfh48ZsbE3jUZFkwI8D4K1KGuYDRrwjQfL_a_9QYRfRknbumNzzZzowB/exec";
+var counts = { adults: 0, bigkids: 0, smallkids: 0 };
+
+var FOOD_MENU = [
+  { id: 'idly',    label: '2 Idly with Sambar & Chutney', price: 3.0 },
+  { id: 'parotta', label: 'Parotta with Veg Salna',        price: 3.0 },
+  { id: 'chicken', label: 'Chicken Roll',                  price: 2.0 },
+  { id: 'veg',     label: 'Veg Roll',                      price: 1.0 },
+  { id: 'kesari',  label: 'Kesari',                        price: 1.0 }
+];
+
+// STATE: kidFood[childIndex][menuId] = true/false
+var kidFood = {};
+
+var selectedVoucher = '';
+var uploadedFiles = [];
+
+// ── Counters ──────────────────────────────────────────────
+function changeCount(type, delta) {
+  counts[type] = Math.max(0, counts[type] + delta);
+  document.getElementById(type + '-val').textContent = counts[type];
+  if (type === 'smallkids') rebuildFoodRows();
+  buildAttendeeNames();
+  updateSummary();
+}
+
+function buildAttendeeNames() {
+  var card = document.getElementById('attendees-card');
+  var container = document.getElementById('attendee-names');
+  var total = counts.adults + counts.bigkids + counts.smallkids;
+  if (total === 0) { card.style.display = 'none'; container.innerHTML = ''; return; }
+  card.style.display = 'block';
+  container.innerHTML = '';
+
+  var groups = [
+    { key: 'adults',    label: 'Adults (18+)',        count: counts.adults },
+    { key: 'bigkids',   label: 'Children (8–17)',     count: counts.bigkids },
+    { key: 'smallkids', label: 'Children (0–7)',      count: counts.smallkids }
+  ];
+
+  groups.forEach(function(g) {
+    if (g.count === 0) return;
+    var group = document.createElement('div');
+    group.className = 'attendee-group';
+
+    var title = document.createElement('div');
+    title.className = 'attendee-group-title';
+    title.textContent = g.label;
+    group.appendChild(title);
+
+    for (var i = 0; i < g.count; i++) {
+      var lbl = document.createElement('div');
+      lbl.className = 'attendee-label';
+      lbl.textContent = g.label.replace(/\s*\(.*\)/, '') + ' ' + (i + 1);
+
+      var row = document.createElement('div');
+      row.className = 'attendee-row';
+
+      var fnField = document.createElement('div');
+      fnField.className = 'field';
+      fnField.innerHTML = '<label>First Name <span class="required">*</span></label>' +
+        '<input type="text" id="att-' + g.key + '-' + i + '-fn" placeholder="First name" />';
+
+      var lnField = document.createElement('div');
+      lnField.className = 'field';
+      lnField.innerHTML = '<label>Last Name <span class="required">*</span></label>' +
+        '<input type="text" id="att-' + g.key + '-' + i + '-ln" placeholder="Last name" />';
+
+      row.appendChild(fnField);
+      row.appendChild(lnField);
+      group.appendChild(lbl);
+      group.appendChild(row);
+      container.appendChild(group);
+    }
+  });
+}
+
+// ── Food rows (built once per child, never re-rendered) ───
+function rebuildFoodRows() {
+  var n = counts.smallkids;
+  var section = document.getElementById('smallkids-food');
+  var container = document.getElementById('food-rows');
+
+  if (n === 0) {
+    section.style.display = 'none';
+    container.innerHTML = '';
+    kidFood = {};
+    return;
+  }
+  section.style.display = 'block';
+
+  // remove extra rows if count decreased
+  while (container.children.length > n) {
+    var last = container.children.length - 1;
+    container.removeChild(container.lastChild);
+    delete kidFood[last];
+  }
+
+  // add new rows if count increased
+  for (var i = container.children.length; i < n; i++) {
+    if (!kidFood[i]) kidFood[i] = {};
+    container.appendChild(buildKidRow(i));
+  }
+}
+
+function buildKidRow(kidIndex) {
+  var wrap = document.createElement('div');
+  wrap.className = 'kid-food-row';
+
+  var title = document.createElement('div');
+  title.className = 'kid-food-label';
+  title.textContent = 'Child ' + (kidIndex + 1) + ' — tap to select items';
+  wrap.appendChild(title);
+
+  for (var m = 0; m < FOOD_MENU.length; m++) {
+    wrap.appendChild(buildFoodItem(kidIndex, FOOD_MENU[m]));
+  }
+  return wrap;
+}
+
+function buildFoodItem(kidIndex, menuItem) {
+  var row = document.createElement('div');
+  row.className = 'food-item';
+  row.id = 'fi-' + kidIndex + '-' + menuItem.id;
+
+  var box = document.createElement('div');
+  box.className = 'fcheck';
+  box.id = 'fc-' + kidIndex + '-' + menuItem.id;
+
+  var name = document.createElement('span');
+  name.className = 'fname';
+  name.textContent = menuItem.label;
+
+  var price = document.createElement('span');
+  price.className = 'fprice';
+  price.textContent = '€' + menuItem.price.toFixed(2);
+
+  row.appendChild(box);
+  row.appendChild(name);
+  row.appendChild(price);
+
+  // closure captures kidIndex and menuItem.id/price
+  (function(ki, mid, mp) {
+    row.addEventListener('click', function() {
+      var isNowSelected = !kidFood[ki][mid];
+      kidFood[ki][mid] = isNowSelected;
+      var rowEl = document.getElementById('fi-' + ki + '-' + mid);
+      var boxEl = document.getElementById('fc-' + ki + '-' + mid);
+      if (isNowSelected) {
+        rowEl.classList.add('selected');
+        boxEl.textContent = '✓';
+      } else {
+        rowEl.classList.remove('selected');
+        boxEl.textContent = '';
+      }
+      updateSummary();
+    });
+  })(kidIndex, menuItem.id, menuItem.price);
+
+  return row;
+}
+
+// ── Summary ───────────────────────────────────────────────
+function getSmallKidsTotal() {
+  var total = 0;
+  for (var ki in kidFood) {
+    for (var mid in kidFood[ki]) {
+      if (kidFood[ki][mid]) {
+        for (var m = 0; m < FOOD_MENU.length; m++) {
+          if (FOOD_MENU[m].id === mid) { total += FOOD_MENU[m].price; break; }
+        }
+      }
+    }
+  }
+  return total;
+}
+
+function updateSummary() {
+  var rows = document.getElementById('summary-rows');
+  var html = '';
+  var total = 0;
+  if (counts.adults > 0) {
+    var v = counts.adults * 13;
+    html += '<div class="summary-row"><span>Adults × ' + counts.adults + '</span><span>€' + v.toFixed(2) + '</span></div>';
+    total += v;
+  }
+  if (counts.bigkids > 0) {
+    var v2 = counts.bigkids * 10;
+    html += '<div class="summary-row"><span>Children 8–17 × ' + counts.bigkids + '</span><span>€' + v2.toFixed(2) + '</span></div>';
+    total += v2;
+  }
+  if (counts.smallkids > 0) {
+    var v3 = getSmallKidsTotal();
+    html += '<div class="summary-row"><span>Children 0–7 food</span><span>€' + v3.toFixed(2) + '</span></div>';
+    total += v3;
+  }
+  if (html === '') {
+    rows.innerHTML = '<div class="summary-row"><span style="color:#BBA898">No attendees selected yet</span></div>';
+    return;
+  }
+  html += '<div class="summary-row total"><span>Total</span><span>€' + total.toFixed(2) + '</span></div>';
+  rows.innerHTML = html;
+}
+
+// ── Payment ───────────────────────────────────────────────
+function togglePayOption(type) {
+  var chk = document.getElementById('chk-' + type);
+  chk.checked = !chk.checked;
+  var opt = document.getElementById('pay-' + type);
+  if (chk.checked) opt.classList.add('selected'); else opt.classList.remove('selected');
+  if (type === 'bank') {
+    document.getElementById('bank-details').style.display = chk.checked ? 'block' : 'none';
+  }
+  if (type === 'voucher') {
+    document.getElementById('voucher-chips').style.display = chk.checked ? 'flex' : 'none';
+    if (!chk.checked) {
+      selectedVoucher = '';
+      document.querySelectorAll('.voucher-chip').forEach(function(c){ c.classList.remove('selected'); });
+    }
+  }
+}
+
+function copyText(text, btn) {
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = 'Copied!';
+    btn.style.background = 'var(--green)';
+    setTimeout(function(){ btn.textContent = 'Copy'; btn.style.background = '#1A3A5C'; }, 2000);
+  });
+}
+
+function selectVoucher(name) {
+  selectedVoucher = name;
+  document.querySelectorAll('.voucher-chip').forEach(function(c){ c.classList.remove('selected'); });
+  document.getElementById('chip-' + name.toLowerCase()).classList.add('selected');
+}
+
+// ── File upload ───────────────────────────────────────────
+function handleFiles(e) {
+  uploadedFiles = uploadedFiles.concat(Array.from(e.target.files));
+  renderFiles();
+}
+function renderFiles() {
+  document.getElementById('file-list').innerHTML = uploadedFiles.map(function(f, i) {
+    return '<div class="file-chip">📄 ' + (f.name.length > 20 ? f.name.slice(0,18)+'…' : f.name) +
+           ' <span class="file-remove" onclick="removeFile(' + i + ')">×</span></div>';
+  }).join('');
+}
+function removeFile(i) { uploadedFiles.splice(i, 1); renderFiles(); }
+
+// ── Submit ────────────────────────────────────────────────
+function submitForm() {
+  if (!document.getElementById('fname').value.trim() || !document.getElementById('lname').value.trim()) { alert('Please enter your full name.'); return; }
+  var email = document.getElementById('email').value.trim();
+  if (!email || !/\S+@\S+\.\S+/.test(email)) { alert('Please enter a valid email address.'); return; }
+  if (!document.getElementById('phone').value.trim()) { alert('Please enter your phone number.'); return; }
+  if (counts.adults + counts.bigkids + counts.smallkids === 0) { alert('Please add at least one attendee.'); return; }
+
+  var groups = [
+    { key: 'adults',    count: counts.adults },
+    { key: 'bigkids',   count: counts.bigkids },
+    { key: 'smallkids', count: counts.smallkids }
+  ];
+  for (var g = 0; g < groups.length; g++) {
+    for (var i = 0; i < groups[g].count; i++) {
+      var fn = document.getElementById('att-' + groups[g].key + '-' + i + '-fn');
+      var ln = document.getElementById('att-' + groups[g].key + '-' + i + '-ln');
+      if (!fn || !fn.value.trim() || !ln || !ln.value.trim()) {
+        alert('Please enter the full name for all attendees.'); fn && fn.focus(); return;
+      }
+    }
+  }
+
+  var bankChecked    = document.getElementById('chk-bank').checked;
+  var voucherChecked = document.getElementById('chk-voucher').checked;
+  if (!bankChecked && !voucherChecked) { alert('Please select at least one payment method.'); return; }
+  if (voucherChecked && !selectedVoucher) { alert('Please select your voucher provider (ePassi, Edenred, or Smartum).'); return; }
+
+  // Build attendee names object
+  var attendeeNames = {};
+  groups.forEach(function(g) {
+    attendeeNames[g.key] = [];
+    for (var i = 0; i < g.count; i++) {
+      var fn = document.getElementById('att-' + g.key + '-' + i + '-fn').value.trim();
+      var ln = document.getElementById('att-' + g.key + '-' + i + '-ln').value.trim();
+      attendeeNames[g.key].push(fn + ' ' + ln);
+    }
+  });
+
+  // Build small kids food summary
+  var smallKidsFoodData = [];
+  var smallKidsFoodTotal = 0;
+  for (var ki = 0; ki < counts.smallkids; ki++) {
+    var items = [];
+    var sel = kidFood[ki] || {};
+    FOOD_MENU.forEach(function(m) {
+      if (sel[m.id]) { items.push({ label: m.label, price: m.price }); smallKidsFoodTotal += m.price; }
+    });
+    smallKidsFoodData.push(items);
+  }
+
+  var paymentMethods = [];
+  if (bankChecked) paymentMethods.push('Bank Transfer');
+  if (voucherChecked) paymentMethods.push('Cultural Voucher');
+
+  var payload = {
+    action: 'register',
+    firstName: document.getElementById('fname').value.trim(),
+    lastName:  document.getElementById('lname').value.trim(),
+    email:     email,
+    phone:     document.getElementById('phone').value.trim(),
+    counts:    counts,
+    attendeeNames: attendeeNames,
+    smallKidsFood: smallKidsFoodData,
+    smallKidsFoodTotal: smallKidsFoodTotal,
+    paymentMethods: paymentMethods,
+    voucherType: selectedVoucher
+  };
+
+  // Disable button and show loading
+  var btn = document.querySelector('.submit-btn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Submitting...';
+
+  fetch(GAS_URL, {
+    method: 'POST',
+    body: JSON.stringify(payload)
+  })
+  .then(function(r) { return r.json(); })
+  .then(function(res) {
+    if (res.status === 'success') {
+      var regId = res.regId;
+      // Upload screenshots if any
+      if (uploadedFiles.length > 0) {
+        uploadScreenshots(uploadedFiles, regId, 0, function() {
+          showSuccess(regId);
+        });
+      } else {
+        showSuccess(regId);
+      }
+    } else {
+      alert('Submission failed: ' + (res.message || 'Unknown error. Please try again.'));
+      btn.disabled = false;
+      btn.textContent = '🎉 Complete Registration';
+    }
+  })
+  .catch(function(err) {
+    alert('Network error. Please check your connection and try again.');
+    btn.disabled = false;
+    btn.textContent = '🎉 Complete Registration';
+  });
+}
+
+function uploadScreenshots(files, regId, index, onDone) {
+  if (index >= files.length) { onDone(); return; }
+  var file = files[index];
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var base64 = e.target.result.split(',')[1];
+    fetch(GAS_URL, {
+      method: 'POST',
+      body: JSON.stringify({
+        action: 'uploadScreenshot',
+        regId: regId,
+        fileName: file.name,
+        mimeType: file.type,
+        fileData: base64
+      })
+    })
+    .then(function() {
+      uploadScreenshots(files, regId, index + 1, onDone);
+    })
+    .catch(function() {
+      uploadScreenshots(files, regId, index + 1, onDone);
+    });
+  };
+  reader.readAsDataURL(file);
+}
+
+function showSuccess(regId) {
+  document.getElementById('main-form').style.display = 'none';
+  var s = document.getElementById('success-screen');
+  s.style.display = 'block';
+  s.innerHTML =
+    '<div class="success-icon">🎊</div>' +
+    '<div class="success-title">Registration Successful!</div>' +
+    '<div class="success-desc">' +
+    'Thank you for registering for the<br>' +
+    '<strong>Tamil New Year &amp; Ramzan 2026 Celebration!</strong><br><br>' +
+    'Your Registration ID: <strong style="color:#1A7A4A">' + regId + '</strong><br><br>' +
+    'A confirmation email has been sent to you.<br>' +
+    'Registration is confirmed after payment verification by FINTA. 🪷' +
+    '</div>';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
