@@ -603,7 +603,10 @@ function submitForm() {
     var items = [];
     var sel = kidFood[ki] || {};
     FOOD_MENU.forEach(function(m) {
-      if (sel[m.id]) { items.push({ label: m.label, price: m.price }); smallKidsFoodTotal += m.price; }
+      if (sel[m.id]) {
+        items.push({ id: m.id, label: m.label, price: m.price });
+        smallKidsFoodTotal += m.price;
+      }
     });
     smallKidsFoodData.push(items);
   }
