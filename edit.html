@@ -91,7 +91,7 @@
 </div>
 
 <script>
-var GAS_URL = "https://script.google.com/macros/s/AKfycbzzb4MetThYClKcgC0dt2InWdvqzAxqMuXu8PGTJD9Y_SFKz8BMWRvthR92HNu-9btG/exec";
+var GAS_URL = "https://script.google.com/macros/s/AKfycbyk_ty0SXGQ9fV8NXoBSNB71qOiElb9rpEBRx-AH2r5k6O11uEKiLnbXJBO2Gcm7PeW/exec";
 var regId = new URLSearchParams(window.location.search).get('regId') || '';
 var uploadedFiles = [];
 var selectedVoucher = '';
@@ -103,13 +103,30 @@ fetch(GAS_URL, { method:'POST', body:JSON.stringify({ action:'getRegistrations' 
   var reg = (res.data||[]).find(function(r){ return r.regId === regId; });
   var el = document.getElementById('reg-details');
   if (!reg) { el.innerHTML = '<div style="color:var(--crimson);font-size:13px;">Registration not found. Please check your link.</div>'; return; }
-  el.innerHTML = '<div class="card-title">Your Registration Details</div>' +
+
+  // Build existing screenshots section
+  var shotHtml = '';
+  if (reg.screenshots && reg.screenshots.trim()) {
+    var shots = reg.screenshots.split('\n').filter(function(s){ return s.trim(); });
+    if (shots.length > 0) {
+      shotHtml = '<div style="margin-top:12px;padding-top:10px;border-top:1px solid var(--border)">' +
+        '<div style="font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Previously Uploaded Screenshots</div>' +
+        shots.map(function(s) {
+          var parts = s.split(': '); var name = parts[0]||'Screenshot'; var url = parts.slice(1).join(': ')||'#';
+          return '<a href="'+url+'" target="_blank" style="display:inline-flex;align-items:center;gap:5px;padding:4px 12px;background:#E8F0FF;border:1px solid #B8CFF0;border-radius:20px;font-size:11px;color:#1A3A8C;text-decoration:none;font-weight:500;margin:2px;">📎 '+name+'</a>';
+        }).join('') + '</div>';
+    }
+  }
+
+  el.innerHTML =
+    '<div class="card-title">Your Registration Details</div>' +
     '<div class="info-row"><span>Name</span><span>'+(reg.firstName||'')+' '+(reg.lastName||'')+'</span></div>' +
     '<div class="info-row"><span>Registration ID</span><span>'+(reg.regId||'')+'</span></div>' +
     '<div class="info-row"><span>Adults</span><span>'+(reg.adults||0)+'</span></div>' +
     '<div class="info-row"><span>Children 8–17</span><span>'+(reg.bigkids||0)+'</span></div>' +
     '<div class="info-row"><span>Children 0–7</span><span>'+(reg.smallkids||0)+'</span></div>' +
-    '<div class="info-row"><span>Grand Total</span><span style="font-weight:700;color:var(--saffron-dark)">€'+(reg.grandTotal||'0.00')+'</span></div>';
+    '<div class="info-row"><span>Grand Total</span><span style="font-weight:700;color:var(--saffron-dark)">€'+(reg.grandTotal||'0.00')+'</span></div>' +
+    shotHtml;
 });
 
 function togglePay(type) {
