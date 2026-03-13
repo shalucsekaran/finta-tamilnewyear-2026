@@ -243,10 +243,8 @@
       <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">You can select both if paying partly by voucher and partly by bank transfer.</div>
       <div class="payment-options">
         <div class="pay-option" id="pay-bank" onclick="togglePayOption('bank')">
-          <input type="checkbox" id="chk-bank" onclick="event.stopPropagation()" />
-          <div style="width:100%">
-            <div class="pay-label">🏦 Bank Transfer</div>
-            <div class="pay-desc">Transfer the amount to our bank account</div>
+          <input type="checkbox" id="chk-bank" onclick="event.stopPropagation(); togglePayOption('bank')" />
+          <div><div class="pay-label">🏦 Bank Transfer</div><div class="pay-desc">Transfer the amount to our bank account</div>
             <div id="bank-details" style="display:none; margin-top:10px; background:#F0F7FF; border:1px solid #B8D4F0; border-radius:8px; padding:10px 12px;">
               <div style="font-size:12px; color:#1A3A5C; line-height:2;">
                 <div><strong>Recipient:</strong> Finland Tamil Sangam ry</div>
@@ -264,7 +262,7 @@
           </div>
         </div>
         <div class="pay-option" id="pay-voucher" onclick="togglePayOption('voucher')">
-          <input type="checkbox" id="chk-voucher" onclick="event.stopPropagation()" />
+          <input type="checkbox" id="chk-voucher" onclick="event.stopPropagation(); togglePayOption('voucher')" />
           <div style="width:100%">
             <div class="pay-label">🎫 Cultural Voucher &nbsp;<strong style="color:var(--crimson);font-size:12px;">— Personal Use Only</strong></div>
             <div class="pay-desc">ePassi · Edenred · Smartum</div>
@@ -311,7 +309,7 @@
 </div>
 
 <script>
-var GAS_URL = "https://script.google.com/macros/s/AKfycbzPeTi6fxodD3uE7KVZx4y4M-6IYsRwBCZiFov0rfkcp4_lLtSNK732VxCg4KiTtP1g/exec";
+var GAS_URL = "https://script.google.com/macros/s/AKfycby8tt0jncK16dEuJzAR2M8ntMsTvdaQEOq8uGs1wJgjkQZ5lV-I1gEXhA6ek3dvoWcl/exec";
 var counts = { adults: 0, bigkids: 0, smallkids: 0 };
 
 var FOOD_MENU = [
@@ -518,7 +516,6 @@ function updateSummary() {
 // ── Payment ───────────────────────────────────────────────
 function togglePayOption(type) {
   var chk = document.getElementById('chk-' + type);
-  chk.checked = !chk.checked;
   var opt = document.getElementById('pay-' + type);
   if (chk.checked) opt.classList.add('selected'); else opt.classList.remove('selected');
   if (type === 'bank') {
