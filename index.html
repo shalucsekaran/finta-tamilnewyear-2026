@@ -18,15 +18,15 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); }
 
-  .header { width: 100%; overflow: hidden; display: block; }
+  .header { width: 100%; display: block; }
   .header-top { background: #6B0000; padding: 6px 0; text-align: center; font-size: 12px; color: #FFD700; letter-spacing: 2px; }
   .header-banner { position: relative; width: 100%; }
-  .header-banner img.banner-bg { width: 100%; display: block; max-height: 220px; object-fit: cover; object-position: center; }
-  .banner-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(0,0,0,0.32); padding: 12px; }
-  .banner-logo { width: 64px; height: 64px; border-radius: 50%; border: 2px solid #FFD700; box-shadow: 0 0 0 3px rgba(255,215,0,0.3); object-fit: cover; background: #fff; margin-bottom: 8px; }
-  .banner-org { font-size: 11px; font-weight: 600; color: #FFD700; letter-spacing: 2px; text-transform: uppercase; text-align: center; text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
-  .banner-title { font-size: 18px; font-weight: 700; color: #fff; text-align: center; text-shadow: 0 2px 6px rgba(0,0,0,0.9); margin-top: 4px; line-height: 1.3; }
-  .header-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; padding: 10px 16px 14px; background: #7A1A00; }
+  .header-banner img.banner-bg { width: 100%; display: block; max-height: 240px; object-fit: cover; object-position: center; }
+  .banner-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 14px; }
+  .banner-logo { width: 60px; height: 60px; border-radius: 50%; border: 2px solid #FFD700; object-fit: cover; background: #fff; margin-bottom: 6px; }
+  .banner-org { font-size: 11px; font-weight: 600; color: #FFD700; letter-spacing: 2px; text-transform: uppercase; text-align: center; text-shadow: 0 1px 6px rgba(0,0,0,0.9); }
+  .banner-title { font-size: 16px; font-weight: 700; color: #fff; text-align: center; text-shadow: 0 2px 8px rgba(0,0,0,0.95); line-height: 1.3; }
+  .header-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; padding: 10px 16px 14px; background: #6B0000; }
   .badge { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,215,0,0.4); border-radius: 20px; padding: 5px 14px; font-size: 12px; color: #FFE9A0; }-size: 22px; margin-bottom: 10px; letter-spacing: 4px; opacity: 0.9; }
   .org-name { font-size: 13px; font-weight: 500; color: rgba(255,220,150,0.95); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px; }
   .event-title { font-size: 26px; font-weight: 700; color: #fff; line-height: 1.2; text-shadow: 0 2px 8px rgba(0,0,0,0.3); margin-bottom: 4px; }
@@ -296,8 +296,7 @@
   </div>
 </div>
 
-<div class="decorative-bar">
-<svg viewBox="0 0 680 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
+<svg viewBox="0 0 680 1" xmlns="http://www.w3.org/2000/svg" style="display:none">
   <defs>
     <radialGradient id="sunGrad" cx="50%" cy="50%" r="50%">
       <stop offset="0%" stop-color="#FFE566"/>
