@@ -54,9 +54,10 @@
   .reg-name { font-size: 14px; font-weight: 600; color: var(--text); }
   .reg-meta { font-size: 11px; color: var(--text-muted); }
   .reg-status { margin-left: auto; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; flex-shrink: 0; }
-  .status-pending  { background: #FFF3CD; color: #7A5500; }
-  .status-verified { background: var(--green-light); color: var(--green); }
-  .status-discrepancy { background: #FDECEA; color: var(--crimson); }
+  .status-pending      { background: #FFF3CD; color: #7A5500; }
+  .status-verified     { background: var(--green-light); color: var(--green); }
+  .status-discrepancy  { background: #FDECEA; color: var(--crimson); }
+  .status-resubmitted  { background: #EDE7F6; color: #5E35B1; }
   .reg-chevron { font-size: 12px; color: var(--text-muted); margin-left: 8px; }
 
   .reg-card-body { display: none; border-top: 1px solid var(--border); padding: 16px; }
@@ -141,6 +142,7 @@
       <button class="filter-btn" onclick="setFilter('Pending',this)">Pending</button>
       <button class="filter-btn" onclick="setFilter('Verified',this)">Verified</button>
       <button class="filter-btn" onclick="setFilter('Discrepancy',this)">Discrepancy</button>
+      <button class="filter-btn" onclick="setFilter('Resubmitted',this)">Resubmitted</button>
       <input class="search-box" id="search-box" placeholder="🔍 Search name / email..." oninput="renderList()" />
     </div>
 
@@ -149,7 +151,7 @@
 </div>
 
 <script>
-var GAS_URL = "https://script.google.com/macros/s/AKfycbzzb4MetThYClKcgC0dt2InWdvqzAxqMuXu8PGTJD9Y_SFKz8BMWRvthR92HNu-9btG/exec";
+var GAS_URL = "https://script.google.com/macros/s/AKfycbyk_ty0SXGQ9fV8NXoBSNB71qOiElb9rpEBRx-AH2r5k6O11uEKiLnbXJBO2Gcm7PeW/exec";
 var PASSWORD = "Finta@2026";
 var USERNAME = "organiser";
 var allRegs = [];
