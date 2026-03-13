@@ -8,8 +8,7 @@
   @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
   :root {
     --saffron: #FF6B00; --saffron-light: #FFF3E8; --saffron-dark: #CC5500;
-    --crimson: #C0392B; --crimson-light: #FDECEA;
-    --gold: #D4AF37; --gold-light: #FDF8E1;
+    --crimson: #C0392B; --gold: #D4AF37; --gold-light: #FDF8E1;
     --green: #1A7A4A; --green-light: #E8F5EE;
     --bg: #FDFAF5; --card: #FFFFFF; --border: #E8DDD0;
     --text: #2C1810; --text-muted: #7A5C4E;
@@ -18,35 +17,26 @@
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); }
 
-  .header { width: 100%; display: block; }
+  .header { position: relative; overflow: hidden; }
+  .header-bg { width: 100%; display: block; max-height: 260px; object-fit: cover; object-position: center top; }
+  .header-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.45); padding: 12px 16px 16px; text-align: center; }
   .header-top { background: #6B0000; padding: 6px 0; text-align: center; font-size: 12px; color: #FFD700; letter-spacing: 2px; }
-  .header-banner { position: relative; width: 100%; }
-  .header-banner img.banner-bg { width: 100%; display: block; max-height: 240px; object-fit: cover; object-position: center; }
-  .banner-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 14px; }
-  .banner-logo { width: 60px; height: 60px; border-radius: 50%; border: 2px solid #FFD700; object-fit: cover; background: #fff; margin-bottom: 6px; }
-  .banner-org { font-size: 11px; font-weight: 600; color: #FFD700; letter-spacing: 2px; text-transform: uppercase; text-align: center; text-shadow: 0 1px 6px rgba(0,0,0,0.9); }
-  .banner-title { font-size: 16px; font-weight: 700; color: #fff; text-align: center; text-shadow: 0 2px 8px rgba(0,0,0,0.95); line-height: 1.3; }
-  .header-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; padding: 10px 16px 14px; background: #6B0000; }
-  .badge { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,215,0,0.4); border-radius: 20px; padding: 5px 14px; font-size: 12px; color: #FFE9A0; }-size: 22px; margin-bottom: 10px; letter-spacing: 4px; opacity: 0.9; }
-  .org-name { font-size: 13px; font-weight: 500; color: rgba(255,220,150,0.95); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 8px; }
-  .event-title { font-size: 26px; font-weight: 700; color: #fff; line-height: 1.2; text-shadow: 0 2px 8px rgba(0,0,0,0.3); margin-bottom: 4px; }
-  .event-subtitle { font-size: 14px; color: #FFD700; font-weight: 500; margin-bottom: 16px; }
-  .header-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .logo-wrap { display: flex; justify-content: center; margin-bottom: 6px; }
+  .logo-wrap img { width: 64px; height: 64px; border-radius: 50%; border: 2px solid #FFD700; object-fit: cover; background: #fff; }
+  .org-name { font-size: 11px; font-weight: 600; color: #FFD700; letter-spacing: 2px; text-transform: uppercase; text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
+  .event-title { font-size: 20px; font-weight: 700; color: #fff; text-shadow: 0 2px 8px rgba(0,0,0,0.9); margin: 4px 0; }
+  .event-subtitle { font-size: 12px; color: #FFD700; font-weight: 500; text-shadow: 0 1px 4px rgba(0,0,0,0.8); }
+  .header-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; padding: 10px 16px; background: #6B0000; }
   .badge { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,215,0,0.4); border-radius: 20px; padding: 5px 14px; font-size: 12px; color: #FFE9A0; }
 
-  .progress-bar { background: #fff; padding: 16px 20px; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-  .steps { display: flex; align-items: center; justify-content: center; max-width: 500px; margin: 0 auto; }
-  .step { display: flex; flex-direction: column; align-items: center; gap: 4px; flex: 1; }
-  .step-circle { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; background: var(--saffron); color: #fff; border: 2px solid var(--saffron); }
-  .step-label { font-size: 10px; color: var(--saffron); font-weight: 500; text-align: center; }
-  .step-line { flex: 1; height: 2px; background: var(--saffron); margin: 0 4px; margin-bottom: 14px; }
-
+  /* ── Form ── */
   .form-container { max-width: 680px; margin: 0 auto; padding: 20px 16px 40px; }
   .section-card { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); margin-bottom: 16px; overflow: hidden; }
   .section-header { padding: 14px 18px; background: linear-gradient(90deg, var(--saffron-light), #fff); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
   .section-icon { width: 32px; height: 32px; border-radius: 8px; background: var(--saffron); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
   .section-title { font-size: 15px; font-weight: 600; color: var(--saffron-dark); }
   .section-body { padding: 18px; }
+  .char-tip { font-size: 11px; color: #BBA898; }
 
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
   @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
@@ -56,7 +46,6 @@
   .field input:focus { border-color: var(--saffron); box-shadow: 0 0 0 3px rgba(255,107,0,0.12); }
   .field input::placeholder { color: #BBA898; }
   .required { color: var(--crimson); }
-  .char-tip { font-size: 11px; color: #BBA898; }
 
   .counter-group { display: flex; flex-direction: column; gap: 10px; }
   .counter-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 14px; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; }
@@ -75,7 +64,6 @@
   .food-section-title { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px dashed var(--border); }
   .kid-food-row { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; margin-bottom: 8px; }
   .kid-food-label { font-size: 12px; font-weight: 600; color: var(--saffron-dark); margin-bottom: 8px; }
-
   .food-item { display: flex; align-items: center; gap: 10px; padding: 8px 10px; border-radius: 6px; border: 1.5px solid var(--border); background: #fff; margin-bottom: 6px; cursor: pointer; }
   .food-item.selected { border-color: var(--saffron); background: var(--saffron-light); }
   .food-item .fcheck { width: 20px; height: 20px; border-radius: 4px; border: 2px solid #ccc; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; color: #fff; }
@@ -87,12 +75,14 @@
   .attendee-group-title { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px dashed var(--border); }
   .attendee-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px; }
   @media (max-width: 480px) { .attendee-row { grid-template-columns: 1fr; } }
-  .attendee-label { font-size: 11px; font-weight: 600; color: var(--saffron-dark); margin-bottom: 5px; } background: #FFF3CD; border: 1.5px solid #FFB800; border-radius: 8px; padding: 12px 14px; margin-bottom: 14px; display: flex; gap: 10px; align-items: flex-start; }
+  .attendee-label { font-size: 11px; font-weight: 600; color: var(--saffron-dark); margin-bottom: 5px; }
+
+  .payment-warning { background: #FFF3CD; border: 1.5px solid #FFB800; border-radius: 8px; padding: 12px 14px; margin-bottom: 14px; display: flex; gap: 10px; align-items: flex-start; }
   .warn-icon { font-size: 18px; flex-shrink: 0; }
   .warn-text { font-size: 12px; color: #7A5500; line-height: 1.6; }
   .warn-text strong { color: #5A3D00; font-size: 13px; }
   .payment-options { display: flex; flex-direction: column; gap: 8px; }
-  .pay-option { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; background: var(--bg); }
+  .pay-option { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; background: var(--bg); }
   .pay-option.selected { border-color: var(--saffron); background: var(--saffron-light); }
   .pay-label { font-size: 13px; font-weight: 600; color: var(--text); }
   .pay-desc { font-size: 11px; color: var(--text-muted); }
@@ -117,6 +107,7 @@
 
   .submit-btn { width: 100%; padding: 15px; margin-top: 16px; background: linear-gradient(135deg, var(--crimson), var(--saffron)); color: #fff; border: none; border-radius: var(--radius); font-family: 'Poppins', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 16px rgba(200,50,20,0.25); }
   .submit-btn:hover { opacity: 0.92; }
+  .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
   .success-screen { display: none; text-align: center; padding: 60px 20px; }
   .success-icon { font-size: 60px; margin-bottom: 16px; }
   .success-title { font-size: 22px; font-weight: 700; color: var(--green); margin-bottom: 8px; }
@@ -127,345 +118,25 @@
 
 <div class="header">
   <div class="header-top">✦ FINLAND TAMIL SANGAM ry ✦</div>
-
-  <!-- Combined banner SVG -->
-  <svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
-    <defs>
-      <!-- Sky gradient: cream-yellow at top fading to deep navy at bottom -->
-      <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%"   stop-color="#F5F0DC"/>
-        <stop offset="45%"  stop-color="#C8A96E"/>
-        <stop offset="75%"  stop-color="#3D2B6B"/>
-        <stop offset="100%" stop-color="#0D1128"/>
-      </linearGradient>
-      <radialGradient id="sunGrad" cx="50%" cy="50%" r="50%">
-        <stop offset="0%"   stop-color="#FFF176"/>
-        <stop offset="50%"  stop-color="#FFB300"/>
-        <stop offset="100%" stop-color="#FF6F00"/>
-      </radialGradient>
-      <radialGradient id="glowGrad" cx="50%" cy="50%" r="50%">
-        <stop offset="0%"   stop-color="#FFB300" stop-opacity="0.5"/>
-        <stop offset="100%" stop-color="#FFB300" stop-opacity="0"/>
-      </radialGradient>
-      <linearGradient id="moonGrad" cx="40%" cy="35%" r="60%" gradientUnits="objectBoundingBox">
-        <stop offset="0%"   stop-color="#FFF176"/>
-        <stop offset="100%" stop-color="#C8960A"/>
-      </linearGradient>
-      <linearGradient id="leafL" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%"   stop-color="#81C784"/>
-        <stop offset="100%" stop-color="#1B5E20"/>
-      </linearGradient>
-      <linearGradient id="leafR" x1="1" y1="0" x2="0" y2="1">
-        <stop offset="0%"   stop-color="#66BB6A"/>
-        <stop offset="100%" stop-color="#2E7D32"/>
-      </linearGradient>
-      <linearGradient id="lanGrad" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%"   stop-color="#FFD54F"/>
-        <stop offset="100%" stop-color="#8B6914"/>
-      </linearGradient>
-      <filter id="glow">
-        <feGaussianBlur stdDeviation="3" result="blur"/>
-        <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-      </filter>
-    </defs>
-
-    <!-- Sky background -->
-    <rect width="680" height="220" fill="url(#skyGrad)"/>
-
-    <!-- ── Banana leaves left ── -->
-    <g transform="translate(-5, 0)">
-      <ellipse cx="40" cy="90" rx="16" ry="80" fill="url(#leafL)" opacity="0.95" transform="rotate(-35,40,90)"/>
-      <line x1="40" y1="10" x2="40" y2="170" stroke="#1B5E20" stroke-width="1.2" transform="rotate(-35,40,90)"/>
-      <ellipse cx="15" cy="70" rx="11" ry="60" fill="url(#leafL)" opacity="0.8" transform="rotate(-50,15,70)"/>
-    </g>
-
-    <!-- ── Banana leaves right ── -->
-    <g transform="translate(640, 0)">
-      <ellipse cx="40" cy="90" rx="16" ry="80" fill="url(#leafR)" opacity="0.95" transform="rotate(35,40,90)"/>
-      <line x1="40" y1="10" x2="40" y2="170" stroke="#1B5E20" stroke-width="1.2" transform="rotate(35,40,90)"/>
-      <ellipse cx="65" cy="70" rx="11" ry="60" fill="url(#leafR)" opacity="0.8" transform="rotate(50,65,70)"/>
-    </g>
-
-    <!-- ── Marigold garland ── -->
-    <path d="M0,18 Q170,45 340,22 Q510,0 680,18" stroke="#E65100" stroke-width="2.5" fill="none" opacity="0.7"/>
-    <!-- Garland flowers -->
-    <g fill="#FF6F00">
-      <circle cx="25"  cy="22" r="5"/><circle cx="25"  cy="22" r="3" fill="#FFD54F"/>
-      <circle cx="65"  cy="32" r="5"/><circle cx="65"  cy="32" r="3" fill="#FFB300"/>
-      <circle cx="110" cy="36" r="5"/><circle cx="110" cy="36" r="3" fill="#FFD54F"/>
-      <circle cx="160" cy="32" r="5"/><circle cx="160" cy="32" r="3" fill="#FFB300"/>
-      <circle cx="210" cy="26" r="5"/><circle cx="210" cy="26" r="3" fill="#FFD54F"/>
-      <circle cx="260" cy="22" r="5"/><circle cx="260" cy="22" r="3" fill="#FFB300"/>
-      <circle cx="310" cy="20" r="6"/><circle cx="310" cy="20" r="3.5" fill="#FFD54F"/>
-      <circle cx="340" cy="18" r="6"/><circle cx="340" cy="18" r="3.5" fill="#FFB300"/>
-      <circle cx="370" cy="20" r="6"/><circle cx="370" cy="20" r="3.5" fill="#FFD54F"/>
-      <circle cx="420" cy="22" r="5"/><circle cx="420" cy="22" r="3" fill="#FFB300"/>
-      <circle cx="470" cy="26" r="5"/><circle cx="470" cy="26" r="3" fill="#FFD54F"/>
-      <circle cx="520" cy="30" r="5"/><circle cx="520" cy="30" r="3" fill="#FFB300"/>
-      <circle cx="570" cy="34" r="5"/><circle cx="570" cy="34" r="3" fill="#FFD54F"/>
-      <circle cx="615" cy="30" r="5"/><circle cx="615" cy="30" r="3" fill="#FFB300"/>
-      <circle cx="655" cy="22" r="5"/><circle cx="655" cy="22" r="3" fill="#FFD54F"/>
-    </g>
-
-    <!-- ── Sun (upper left area) ── -->
-    <circle cx="180" cy="68" r="40" fill="url(#glowGrad)"/>
-    <g transform="translate(180,68)" stroke="#FFB300" stroke-width="2" opacity="0.8">
-      <line x1="0" y1="-32" x2="0" y2="-24"/>
-      <line x1="23" y1="-23" x2="17" y2="-17"/>
-      <line x1="32" y1="0"   x2="24" y2="0"/>
-      <line x1="23" y1="23"  x2="17" y2="17"/>
-      <line x1="0"  y1="32"  x2="0"  y2="24"/>
-      <line x1="-23" y1="23" x2="-17" y2="17"/>
-      <line x1="-32" y1="0"  x2="-24" y2="0"/>
-      <line x1="-23" y1="-23" x2="-17" y2="-17"/>
-      <line x1="16"  y1="-28" x2="12" y2="-21"/>
-      <line x1="28"  y1="-16" x2="21" y2="-12"/>
-      <line x1="28"  y1="16"  x2="21" y2="12"/>
-      <line x1="16"  y1="28"  x2="12" y2="21"/>
-      <line x1="-16" y1="28"  x2="-12" y2="21"/>
-      <line x1="-28" y1="16"  x2="-21" y2="12"/>
-      <line x1="-28" y1="-16" x2="-21" y2="-12"/>
-      <line x1="-16" y1="-28" x2="-12" y2="-21"/>
-    </g>
-    <circle cx="180" cy="68" r="22" fill="url(#sunGrad)"/>
-    <circle cx="180" cy="68" r="14" fill="#FFF176" opacity="0.5"/>
-
-    <!-- ── Crescent moon (upper right area) ── -->
-    <g transform="translate(500,62)" filter="url(#glow)">
-      <path d="M0,-28 A28,28 0 1,1 24,14 A18,18 0 1,0 0,-28 Z" fill="#FFD54F"/>
-      <path d="M0,-28 A28,28 0 1,1 24,14 A18,18 0 1,0 0,-28 Z" fill="#C8960A" opacity="0.3"/>
-    </g>
-
-    <!-- ── Stars ── -->
-    <g fill="#FFD54F" opacity="0.9">
-      <polygon points="430,30 432,36 438,36 433,40 435,46 430,42 425,46 427,40 422,36 428,36" transform="scale(0.6) translate(280,0)"/>
-      <polygon points="430,30 432,36 438,36 433,40 435,46 430,42 425,46 427,40 422,36 428,36" transform="translate(580,20) scale(0.5)"/>
-      <polygon points="430,30 432,36 438,36 433,40 435,46 430,42 425,46 427,40 422,36 428,36" transform="translate(610,55) scale(0.4)"/>
-      <polygon points="430,30 432,36 438,36 433,40 435,46 430,42 425,46 427,40 422,36 428,36" transform="translate(450,50) scale(0.35)"/>
-      <polygon points="430,30 432,36 438,36 433,40 435,46 430,42 425,46 427,40 422,36 428,36" transform="translate(560,65) scale(0.3)"/>
-    </g>
-
-    <!-- ── Hanging lanterns ── -->
-    <!-- Chain lines -->
-    <line x1="590" y1="0"  x2="585" y2="50"  stroke="#D4AF37" stroke-width="0.8" opacity="0.7"/>
-    <line x1="630" y1="0"  x2="632" y2="42"  stroke="#D4AF37" stroke-width="0.8" opacity="0.7"/>
-    <!-- Lantern 1 -->
-    <g transform="translate(578,48)">
-      <rect x="-9"  y="0"  width="18" height="3"  rx="1.5" fill="url(#lanGrad)"/>
-      <rect x="-8"  y="3"  width="16" height="26" rx="4"   fill="url(#lanGrad)" opacity="0.9"/>
-      <rect x="-5"  y="6"  width="10" height="20" rx="2"   fill="#1A1128" opacity="0.55"/>
-      <line x1="-8" y1="10" x2="8"  y2="10" stroke="#FFD54F" stroke-width="0.7"/>
-      <line x1="-8" y1="16" x2="8"  y2="16" stroke="#FFD54F" stroke-width="0.7"/>
-      <line x1="-8" y1="22" x2="8"  y2="22" stroke="#FFD54F" stroke-width="0.7"/>
-      <rect x="-9"  y="29" width="18" height="3"  rx="1.5" fill="url(#lanGrad)"/>
-      <circle cx="0" cy="16" r="5" fill="#FF8F00" opacity="0.35"/>
-      <rect x="-3"  y="32" width="6"  height="6"  rx="1"   fill="url(#lanGrad)"/>
-    </g>
-    <!-- Lantern 2 (smaller) -->
-    <g transform="translate(625,40)">
-      <rect x="-7"  y="0"  width="14" height="2"  rx="1" fill="url(#lanGrad)"/>
-      <rect x="-6"  y="2"  width="12" height="20" rx="3" fill="url(#lanGrad)" opacity="0.85"/>
-      <rect x="-4"  y="4"  width="8"  height="16" rx="2" fill="#1A1128" opacity="0.55"/>
-      <line x1="-6" y1="8"  x2="6"  y2="8"  stroke="#FFD54F" stroke-width="0.6"/>
-      <line x1="-6" y1="14" x2="6"  y2="14" stroke="#FFD54F" stroke-width="0.6"/>
-      <rect x="-7"  y="22" width="14" height="2"  rx="1" fill="url(#lanGrad)"/>
-      <rect x="-2"  y="24" width="4"  height="5"  rx="1" fill="url(#lanGrad)"/>
-    </g>
-
-    <!-- ── FINTA logo circle ── -->
-    <circle cx="340" cy="105" r="36" fill="#fff" opacity="0.15"/>
-    <circle cx="340" cy="105" r="34" fill="none" stroke="#FFD700" stroke-width="1.5" opacity="0.8"/>
-    <image href="https://i.postimg.cc/q79kgDYK/IMG-2861.png" x="306" y="71" width="68" height="68" clip-path="circle(34px at 34px 34px)"/>
-
-    <!-- ── Event text ── -->
-    <text x="340" y="155" text-anchor="middle" font-size="11" fill="#FFD700" font-family="serif" letter-spacing="3" opacity="0.9">FINLAND TAMIL SANGAM ry</text>
-    <text x="340" y="173" text-anchor="middle" font-size="16" font-weight="700" fill="#fff" font-family="serif" letter-spacing="1">Tamil New Year &amp; Ramzan 2026</text>
-    <text x="340" y="191" text-anchor="middle" font-size="11" fill="#FFD700" font-family="serif">தமிழ் புத்தாண்டு · ரம்ஜான் முபாரக்</text>
-
-
-
-
-  <defs>
-    <radialGradient id="sunGrad" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#FFE566"/>
-      <stop offset="60%" stop-color="#FFB300"/>
-      <stop offset="100%" stop-color="#FF8F00"/>
-    </radialGradient>
-    <radialGradient id="moonGrad" cx="40%" cy="40%" r="60%">
-      <stop offset="0%" stop-color="#FFE566"/>
-      <stop offset="100%" stop-color="#C8960A"/>
-    </radialGradient>
-    <linearGradient id="tamilBg" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#F5F0DC"/>
-      <stop offset="100%" stop-color="#EDE8C8"/>
-    </linearGradient>
-    <linearGradient id="ramzanBg" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#1A1F3A"/>
-      <stop offset="100%" stop-color="#0D1128"/>
-    </linearGradient>
-    <linearGradient id="lanternGrad" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#D4AF37"/>
-      <stop offset="100%" stop-color="#8B6914"/>
-    </linearGradient>
-    <linearGradient id="leafGrad1" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#66BB6A"/>
-      <stop offset="100%" stop-color="#1B5E20"/>
-    </linearGradient>
-    <linearGradient id="leafGrad2" x1="1" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#81C784"/>
-      <stop offset="100%" stop-color="#2E7D32"/>
-    </linearGradient>
-  </defs>
-
-  <!-- Tamil side background (left half) -->
-  <rect x="0" y="0" width="340" height="160" fill="url(#tamilBg)"/>
-  <!-- Ramzan side background (right half) -->
-  <rect x="340" y="0" width="340" height="160" fill="url(#ramzanBg)"/>
-
-  <!-- ═══ TAMIL SIDE ═══ -->
-
-  <!-- Banana leaf left big -->
-  <g transform="translate(-10, -5) rotate(-30, 60, 80)">
-    <ellipse cx="60" cy="80" rx="18" ry="70" fill="url(#leafGrad1)" opacity="0.95"/>
-    <line x1="60" y1="10" x2="60" y2="150" stroke="#1B5E20" stroke-width="1.5"/>
-    <line x1="42" y1="40" x2="60" y2="50" stroke="#2E7D32" stroke-width="0.8"/>
-    <line x1="40" y1="60" x2="60" y2="68" stroke="#2E7D32" stroke-width="0.8"/>
-    <line x1="42" y1="80" x2="60" y2="86" stroke="#2E7D32" stroke-width="0.8"/>
-    <line x1="78" y1="40" x2="60" y2="50" stroke="#2E7D32" stroke-width="0.8"/>
-    <line x1="80" y1="60" x2="60" y2="68" stroke="#2E7D32" stroke-width="0.8"/>
-    <line x1="78" y1="80" x2="60" y2="86" stroke="#2E7D32" stroke-width="0.8"/>
-  </g>
-
-  <!-- Banana leaf left small -->
-  <g transform="translate(30, -15) rotate(-15, 50, 70)">
-    <ellipse cx="50" cy="70" rx="13" ry="55" fill="url(#leafGrad2)" opacity="0.85"/>
-    <line x1="50" y1="15" x2="50" y2="125" stroke="#1B5E20" stroke-width="1.2"/>
-  </g>
-
-  <!-- Marigold garland top -->
-  <path d="M0,8 Q85,30 170,12 Q255,0 340,15" stroke="#FF8F00" stroke-width="3" fill="none" opacity="0.6"/>
-  <!-- Garland flowers -->
-  <circle cx="20"  cy="10" r="5" fill="#FF6F00"/>
-  <circle cx="20"  cy="10" r="3" fill="#FFB300"/>
-  <circle cx="55"  cy="18" r="5" fill="#E65100"/>
-  <circle cx="55"  cy="18" r="3" fill="#FF8F00"/>
-  <circle cx="90"  cy="22" r="5" fill="#FF6F00"/>
-  <circle cx="90"  cy="22" r="3" fill="#FFD54F"/>
-  <circle cx="125" cy="16" r="5" fill="#E65100"/>
-  <circle cx="125" cy="16" r="3" fill="#FF8F00"/>
-  <circle cx="160" cy="12" r="5" fill="#FF6F00"/>
-  <circle cx="160" cy="12" r="3" fill="#FFB300"/>
-  <circle cx="195" cy="10" r="5" fill="#E65100"/>
-  <circle cx="195" cy="10" r="3" fill="#FFD54F"/>
-  <circle cx="230" cy="14" r="5" fill="#FF6F00"/>
-  <circle cx="230" cy="14" r="3" fill="#FF8F00"/>
-  <circle cx="265" cy="18" r="5" fill="#E65100"/>
-  <circle cx="265" cy="18" r="3" fill="#FFB300"/>
-  <circle cx="300" cy="14" r="5" fill="#FF6F00"/>
-  <circle cx="300" cy="14" r="3" fill="#FFD54F"/>
-  <circle cx="330" cy="16" r="5" fill="#E65100"/>
-  <circle cx="330" cy="16" r="3" fill="#FF8F00"/>
-
-  <!-- Sun -->
-  <g transform="translate(185, 45)">
-    <!-- Sun rays -->
-    <g stroke="#FFB300" stroke-width="2" opacity="0.7">
-      <line x1="0" y1="-30" x2="0" y2="-22"/>
-      <line x1="21" y1="-21" x2="16" y2="-16"/>
-      <line x1="30" y1="0" x2="22" y2="0"/>
-      <line x1="21" y1="21" x2="16" y2="16"/>
-      <line x1="0" y1="30" x2="0" y2="22"/>
-      <line x1="-21" y1="21" x2="-16" y2="16"/>
-      <line x1="-30" y1="0" x2="-22" y2="0"/>
-      <line x1="-21" y1="-21" x2="-16" y2="-16"/>
-    </g>
-    <circle cx="0" cy="0" r="18" fill="url(#sunGrad)"/>
-    <circle cx="0" cy="0" r="13" fill="#FFE566" opacity="0.6"/>
-  </g>
-
-  <!-- Tamil text -->
-  <text x="170" y="95" text-anchor="middle" font-size="13" font-weight="700" fill="#5D3A00" font-family="serif" letter-spacing="1">இனிய தமிழ் புத்தாண்டு</text>
-  <text x="170" y="113" text-anchor="middle" font-size="10" fill="#7A5C00" font-family="serif">நல்வாழ்த்துகள்!</text>
-
-  <!-- Kolam dots bottom left -->
-  <circle cx="30"  cy="148" r="2.5" fill="#D4AF37"/>
-  <circle cx="45"  cy="152" r="2"   fill="#E8430A"/>
-  <circle cx="60"  cy="148" r="2.5" fill="#D4AF37"/>
-  <circle cx="75"  cy="152" r="2"   fill="#E8430A"/>
-  <circle cx="90"  cy="148" r="2.5" fill="#D4AF37"/>
-  <circle cx="105" cy="152" r="2"   fill="#E8430A"/>
-  <circle cx="120" cy="148" r="2.5" fill="#D4AF37"/>
-  <circle cx="135" cy="152" r="2"   fill="#E8430A"/>
-  <circle cx="150" cy="148" r="2.5" fill="#D4AF37"/>
-
-  <!-- Divider -->
-  <line x1="340" y1="0" x2="340" y2="160" stroke="#D4AF37" stroke-width="2" opacity="0.6"/>
-
-  <!-- ═══ RAMZAN SIDE ═══ -->
-
-  <!-- Stars scattered -->
-  <g fill="#D4AF37" opacity="0.85">
-    <!-- 5-point star function approximated as polygons -->
-    <polygon points="420,30 422,36 428,36 423,40 425,46 420,42 415,46 417,40 412,36 418,36" transform="scale(0.7) translate(185,10)"/>
-    <polygon points="420,30 422,36 428,36 423,40 425,46 420,42 415,46 417,40 412,36 418,36" transform="translate(370,18) scale(0.5)"/>
-    <polygon points="420,30 422,36 428,36 423,40 425,46 420,42 415,46 417,40 412,36 418,36" transform="translate(430,55) scale(0.4)"/>
-    <polygon points="420,30 422,36 428,36 423,40 425,46 420,42 415,46 417,40 412,36 418,36" transform="translate(460,25) scale(0.55)"/>
-    <polygon points="420,30 422,36 428,36 423,40 425,46 420,42 415,46 417,40 412,36 418,36" transform="translate(490,70) scale(0.35)"/>
-    <polygon points="420,30 422,36 428,36 423,40 425,46 420,42 415,46 417,40 412,36 418,36" transform="translate(620,40) scale(0.45)"/>
-    <polygon points="420,30 422,36 428,36 423,40 425,46 420,42 415,46 417,40 412,36 418,36" transform="translate(650,15) scale(0.5)"/>
-  </g>
-
-  <!-- Hanging chains -->
-  <line x1="500" y1="0"  x2="490" y2="55"  stroke="#D4AF37" stroke-width="0.8" opacity="0.6"/>
-  <line x1="530" y1="0"  x2="525" y2="45"  stroke="#D4AF37" stroke-width="0.8" opacity="0.6"/>
-  <line x1="590" y1="0"  x2="598" y2="50"  stroke="#D4AF37" stroke-width="0.8" opacity="0.6"/>
-  <line x1="620" y1="0"  x2="625" y2="42"  stroke="#D4AF37" stroke-width="0.8" opacity="0.6"/>
-
-  <!-- Lantern left -->
-  <g transform="translate(482, 52)">
-    <rect x="-8" y="0"  width="16" height="2"  rx="1" fill="url(#lanternGrad)"/>
-    <rect x="-7" y="2"  width="14" height="22" rx="3" fill="url(#lanternGrad)" opacity="0.9"/>
-    <rect x="-5" y="4"  width="10" height="18" rx="2" fill="#1A1F3A" opacity="0.5"/>
-    <line x1="-7" y1="8"  x2="7"  y2="8"  stroke="#D4AF37" stroke-width="0.6"/>
-    <line x1="-7" y1="14" x2="7"  y2="14" stroke="#D4AF37" stroke-width="0.6"/>
-    <line x1="-7" y1="20" x2="7"  y2="20" stroke="#D4AF37" stroke-width="0.6"/>
-    <rect x="-8" y="24" width="16" height="2"  rx="1" fill="url(#lanternGrad)"/>
-    <circle cx="0" cy="13" r="4" fill="#FF8F00" opacity="0.4"/>
-    <rect x="-3" y="26" width="6"  height="5"  rx="1" fill="url(#lanternGrad)"/>
-  </g>
-
-  <!-- Lantern right (smaller) -->
-  <g transform="translate(530, 42)">
-    <rect x="-6" y="0"  width="12" height="2"  rx="1" fill="url(#lanternGrad)"/>
-    <rect x="-5" y="2"  width="10" height="18" rx="3" fill="url(#lanternGrad)" opacity="0.85"/>
-    <rect x="-3" y="4"  width="6"  height="14" rx="2" fill="#1A1F3A" opacity="0.5"/>
-    <line x1="-5" y1="7"  x2="5"  y2="7"  stroke="#D4AF37" stroke-width="0.5"/>
-    <line x1="-5" y1="13" x2="5"  y2="13" stroke="#D4AF37" stroke-width="0.5"/>
-    <rect x="-6" y="20" width="12" height="2"  rx="1" fill="url(#lanternGrad)"/>
-    <rect x="-2" y="22" width="4"  height="4"  rx="1" fill="url(#lanternGrad)"/>
-  </g>
-
-  <!-- Crescent moon -->
-  <g transform="translate(390, 55)">
-    <path d="M0,0 A28,28 0 1,1 28,28 A18,18 0 1,0 0,0 Z" fill="url(#moonGrad)" transform="rotate(-30)"/>
-  </g>
-
-  <!-- Ramzan text -->
-  <text x="510" y="108" text-anchor="middle" font-size="13" font-weight="700" fill="#D4AF37" font-family="serif" letter-spacing="2">رَمَضَان مُبَارَك</text>
-  <text x="510" y="126" text-anchor="middle" font-size="10" fill="#FFD700" font-family="serif" opacity="0.85">Ramzan Mubarak</text>
-
-  <!-- Gold dots bottom right -->
-  <circle cx="370" cy="148" r="2.5" fill="#D4AF37"/>
-  <circle cx="385" cy="152" r="2"   fill="#FFD700" opacity="0.6"/>
-  <circle cx="400" cy="148" r="2.5" fill="#D4AF37"/>
-  <circle cx="415" cy="152" r="2"   fill="#FFD700" opacity="0.6"/>
-  <circle cx="430" cy="148" r="2.5" fill="#D4AF37"/>
-  <circle cx="445" cy="152" r="2"   fill="#FFD700" opacity="0.6"/>
-  <circle cx="460" cy="148" r="2.5" fill="#D4AF37"/>
-
-</svg>
+  <div style="position:relative;">
+    <img class="header-bg" src="https://i.postimg.cc/pLg0qZDW/Screenshot-2026-03-13-184223.png" alt="Banner" onerror="this.parentNode.style.background='linear-gradient(135deg,#8B0000,#FF6B00)';this.style.display='none'" />
+    <div class="header-overlay">
+      <div class="logo-wrap">
+        <img src="https://i.postimg.cc/q79kgDYK/IMG-2861.png" alt="FINTA Logo" onerror="this.style.display='none'" />
+      </div>
+      <div class="org-name">Finland Tamil Sangam ry</div>
+      <div class="event-title">Tamil New Year &amp; Ramzan 2026</div>
+      <div class="event-subtitle">தமிழ் புத்தாண்டு · ரம்ஜான் முபாரக்</div>
+    </div>
+  </div>
+  <div class="header-badges">
+    <span class="badge">📅 Register Now</span>
+    <span class="badge">🎉 Food Included</span>
+    <span class="badge">👨‍👩‍👧‍👦 Family Event</span>
+  </div>
 </div>
 
+<!-- Form -->
 <div class="form-container" id="main-form">
 
   <!-- Personal Info -->
@@ -503,7 +174,7 @@
           </div>
         </div>
         <div class="counter-item">
-          <div class="counter-info"><div class="counter-label">Children age 8–17</div><div class="counter-price">€10 — food only · Free entry</div></div>
+          <div class="counter-info"><div class="counter-label">Children age 8–17</div><div class="counter-price">€10 — same food as adults · Free entry</div></div>
           <div class="counter-controls">
             <button class="counter-btn" onclick="changeCount('bigkids',-1)">−</button>
             <span class="counter-val" id="bigkids-val">0</span>
@@ -558,19 +229,19 @@
       <div class="payment-options">
         <div class="pay-option" id="pay-bank" onclick="togglePayOption('bank')">
           <input type="checkbox" id="chk-bank" onclick="event.stopPropagation(); togglePayOption('bank')" />
-          <div><div class="pay-label">🏦 Bank Transfer</div><div class="pay-desc">Transfer the amount to our bank account</div>
+          <div style="width:100%">
+            <div class="pay-label">🏦 Bank Transfer</div>
+            <div class="pay-desc">Transfer the amount to our bank account</div>
             <div id="bank-details" style="display:none; margin-top:10px; background:#F0F7FF; border:1px solid #B8D4F0; border-radius:8px; padding:10px 12px;">
               <div style="font-size:12px; color:#1A3A5C; line-height:2;">
                 <div><strong>Recipient:</strong> Finland Tamil Sangam ry</div>
                 <div style="display:flex;align-items:center;gap:6px;">
                   <strong>IBAN:</strong> FI25 1544 3000 0023 73
-                  <span onclick="copyText('FI2515443000002373', this)" style="cursor:pointer;background:#1A3A5C;color:#fff;font-size:10px;padding:2px 8px;border-radius:10px;">Copy</span>
+                  <span onclick="copyText('FI2515443000002373',this)" style="cursor:pointer;background:#1A3A5C;color:#fff;font-size:10px;padding:2px 8px;border-radius:10px;">Copy</span>
                 </div>
                 <div><strong>BIC:</strong> NDEAFIHH</div>
                 <div><strong>Reference:</strong> Will be provided by FINTA</div>
-                <div style="margin-top:6px;font-size:11px;color:#7A5C4E;border-top:1px dashed #ccc;padding-top:6px;">
-                  ⚠️ Payment must be made in advance before submitting this form. Payments are non-refundable and cannot be transferred.
-                </div>
+                <div style="margin-top:6px;font-size:11px;color:#7A5C4E;border-top:1px dashed #ccc;padding-top:6px;">⚠️ Payment must be made in advance. Payments are non-refundable and cannot be transferred.</div>
               </div>
             </div>
           </div>
@@ -581,7 +252,7 @@
             <div class="pay-label">🎫 Cultural Voucher &nbsp;<strong style="color:var(--crimson);font-size:12px;">— Personal Use Only</strong></div>
             <div class="pay-desc">ePassi · Edenred · Smartum</div>
             <div class="voucher-options" id="voucher-chips" style="display:none">
-              <span class="voucher-chip" id="chip-epassi" onclick="event.stopPropagation();selectVoucher('ePassi')">ePassi</span>
+              <span class="voucher-chip" id="chip-epassi"  onclick="event.stopPropagation();selectVoucher('ePassi')">ePassi</span>
               <span class="voucher-chip" id="chip-edenred" onclick="event.stopPropagation();selectVoucher('Edenred')">Edenred</span>
               <span class="voucher-chip" id="chip-smartum" onclick="event.stopPropagation();selectVoucher('Smartum')">Smartum</span>
             </div>
@@ -616,16 +287,11 @@
   <button class="submit-btn" onclick="submitForm()">🎉 Complete Registration</button>
 </div>
 
-<div class="success-screen" id="success-screen">
-  <div class="success-icon">🎊</div>
-  <div class="success-title">Registration Successful!</div>
-  <div class="success-desc">Thank you for registering for the<br><strong>Tamil New Year &amp; Ramzan 2026 Celebration!</strong><br><br>A confirmation email will be sent to you shortly.<br>We look forward to celebrating with you! 🪷</div>
-</div>
+<div class="success-screen" id="success-screen"></div>
 
 <script>
 var GAS_URL = "https://script.google.com/macros/s/AKfycby8tt0jncK16dEuJzAR2M8ntMsTvdaQEOq8uGs1wJgjkQZ5lV-I1gEXhA6ek3dvoWcl/exec";
 var counts = { adults: 0, bigkids: 0, smallkids: 0 };
-
 var FOOD_MENU = [
   { id: 'idly',    label: '2 Idly with Sambar & Chutney', price: 3.0 },
   { id: 'parotta', label: 'Parotta with Veg Salna',        price: 3.0 },
@@ -633,14 +299,10 @@ var FOOD_MENU = [
   { id: 'veg',     label: 'Veg Roll',                      price: 1.0 },
   { id: 'kesari',  label: 'Kesari',                        price: 1.0 }
 ];
-
-// STATE: kidFood[childIndex][menuId] = true/false
 var kidFood = {};
-
 var selectedVoucher = '';
 var uploadedFiles = [];
 
-// ── Counters ──────────────────────────────────────────────
 function changeCount(type, delta) {
   counts[type] = Math.max(0, counts[type] + delta);
   document.getElementById(type + '-val').textContent = counts[type];
@@ -649,207 +311,88 @@ function changeCount(type, delta) {
   updateSummary();
 }
 
+function rebuildFoodRows() {
+  var n = counts.smallkids;
+  var section = document.getElementById('smallkids-food');
+  var container = document.getElementById('food-rows');
+  if (n === 0) { section.style.display = 'none'; container.innerHTML = ''; kidFood = {}; return; }
+  section.style.display = 'block';
+  while (container.children.length > n) { container.removeChild(container.lastChild); delete kidFood[container.children.length]; }
+  for (var i = container.children.length; i < n; i++) { if (!kidFood[i]) kidFood[i] = {}; container.appendChild(buildKidRow(i)); }
+}
+
+function buildKidRow(ki) {
+  var wrap = document.createElement('div'); wrap.className = 'kid-food-row';
+  var title = document.createElement('div'); title.className = 'kid-food-label';
+  title.textContent = 'Child ' + (ki + 1) + ' — tap to select items'; wrap.appendChild(title);
+  FOOD_MENU.forEach(function(m) { wrap.appendChild(buildFoodItem(ki, m)); });
+  return wrap;
+}
+
+function buildFoodItem(ki, m) {
+  var row = document.createElement('div'); row.className = 'food-item'; row.id = 'fi-' + ki + '-' + m.id;
+  var box = document.createElement('div'); box.className = 'fcheck'; box.id = 'fc-' + ki + '-' + m.id;
+  var name = document.createElement('span'); name.className = 'fname'; name.textContent = m.label;
+  var price = document.createElement('span'); price.className = 'fprice'; price.textContent = '€' + m.price.toFixed(2);
+  row.appendChild(box); row.appendChild(name); row.appendChild(price);
+  (function(kidIdx, mid, mp) {
+    row.addEventListener('click', function() {
+      var isNow = !kidFood[kidIdx][mid]; kidFood[kidIdx][mid] = isNow;
+      var r = document.getElementById('fi-' + kidIdx + '-' + mid);
+      var b = document.getElementById('fc-' + kidIdx + '-' + mid);
+      if (isNow) { r.classList.add('selected'); b.textContent = '✓'; } else { r.classList.remove('selected'); b.textContent = ''; }
+      updateSummary();
+    });
+  })(ki, m.id, m.price);
+  return row;
+}
+
+function getSmallKidsTotal() {
+  var total = 0;
+  for (var ki in kidFood) { for (var mid in kidFood[ki]) { if (kidFood[ki][mid]) { FOOD_MENU.forEach(function(m) { if (m.id === mid) total += m.price; }); } } }
+  return total;
+}
+
 function buildAttendeeNames() {
   var card = document.getElementById('attendees-card');
   var container = document.getElementById('attendee-names');
   var total = counts.adults + counts.bigkids + counts.smallkids;
   if (total === 0) { card.style.display = 'none'; container.innerHTML = ''; return; }
-  card.style.display = 'block';
-  container.innerHTML = '';
-
-  var groups = [
-    { key: 'adults',    label: 'Adults (18+)',        count: counts.adults },
-    { key: 'bigkids',   label: 'Children (8–17)',     count: counts.bigkids },
-    { key: 'smallkids', label: 'Children (0–7)',      count: counts.smallkids }
-  ];
-
+  card.style.display = 'block'; container.innerHTML = '';
+  var groups = [{ key:'adults', label:'Adults (18+)', count:counts.adults }, { key:'bigkids', label:'Children (8–17)', count:counts.bigkids }, { key:'smallkids', label:'Children (0–7)', count:counts.smallkids }];
   groups.forEach(function(g) {
     if (g.count === 0) return;
-    var group = document.createElement('div');
-    group.className = 'attendee-group';
-
-    var title = document.createElement('div');
-    title.className = 'attendee-group-title';
-    title.textContent = g.label;
-    group.appendChild(title);
-
+    var group = document.createElement('div'); group.className = 'attendee-group';
+    var title = document.createElement('div'); title.className = 'attendee-group-title'; title.textContent = g.label; group.appendChild(title);
     for (var i = 0; i < g.count; i++) {
-      var lbl = document.createElement('div');
-      lbl.className = 'attendee-label';
-      lbl.textContent = g.label.replace(/\s*\(.*\)/, '') + ' ' + (i + 1);
-
-      var row = document.createElement('div');
-      row.className = 'attendee-row';
-
-      var fnField = document.createElement('div');
-      fnField.className = 'field';
-      fnField.innerHTML = '<label>First Name <span class="required">*</span></label>' +
-        '<input type="text" id="att-' + g.key + '-' + i + '-fn" placeholder="First name" />';
-
-      var lnField = document.createElement('div');
-      lnField.className = 'field';
-      lnField.innerHTML = '<label>Last Name <span class="required">*</span></label>' +
-        '<input type="text" id="att-' + g.key + '-' + i + '-ln" placeholder="Last name" />';
-
-      row.appendChild(fnField);
-      row.appendChild(lnField);
-      group.appendChild(lbl);
-      group.appendChild(row);
-      container.appendChild(group);
+      var lbl = document.createElement('div'); lbl.className = 'attendee-label'; lbl.textContent = g.label.replace(/\s*\(.*\)/,'') + ' ' + (i+1);
+      var row = document.createElement('div'); row.className = 'attendee-row';
+      var fn = document.createElement('div'); fn.className = 'field'; fn.innerHTML = '<label>First Name <span class="required">*</span></label><input type="text" id="att-'+g.key+'-'+i+'-fn" placeholder="First name" />';
+      var ln = document.createElement('div'); ln.className = 'field'; ln.innerHTML = '<label>Last Name <span class="required">*</span></label><input type="text" id="att-'+g.key+'-'+i+'-ln" placeholder="Last name" />';
+      row.appendChild(fn); row.appendChild(ln); group.appendChild(lbl); group.appendChild(row); container.appendChild(group);
     }
   });
 }
 
-// ── Food rows (built once per child, never re-rendered) ───
-function rebuildFoodRows() {
-  var n = counts.smallkids;
-  var section = document.getElementById('smallkids-food');
-  var container = document.getElementById('food-rows');
-
-  if (n === 0) {
-    section.style.display = 'none';
-    container.innerHTML = '';
-    kidFood = {};
-    return;
-  }
-  section.style.display = 'block';
-
-  // remove extra rows if count decreased
-  while (container.children.length > n) {
-    var last = container.children.length - 1;
-    container.removeChild(container.lastChild);
-    delete kidFood[last];
-  }
-
-  // add new rows if count increased
-  for (var i = container.children.length; i < n; i++) {
-    if (!kidFood[i]) kidFood[i] = {};
-    container.appendChild(buildKidRow(i));
-  }
-}
-
-function buildKidRow(kidIndex) {
-  var wrap = document.createElement('div');
-  wrap.className = 'kid-food-row';
-
-  var title = document.createElement('div');
-  title.className = 'kid-food-label';
-  title.textContent = 'Child ' + (kidIndex + 1) + ' — tap to select items';
-  wrap.appendChild(title);
-
-  for (var m = 0; m < FOOD_MENU.length; m++) {
-    wrap.appendChild(buildFoodItem(kidIndex, FOOD_MENU[m]));
-  }
-  return wrap;
-}
-
-function buildFoodItem(kidIndex, menuItem) {
-  var row = document.createElement('div');
-  row.className = 'food-item';
-  row.id = 'fi-' + kidIndex + '-' + menuItem.id;
-
-  var box = document.createElement('div');
-  box.className = 'fcheck';
-  box.id = 'fc-' + kidIndex + '-' + menuItem.id;
-
-  var name = document.createElement('span');
-  name.className = 'fname';
-  name.textContent = menuItem.label;
-
-  var price = document.createElement('span');
-  price.className = 'fprice';
-  price.textContent = '€' + menuItem.price.toFixed(2);
-
-  row.appendChild(box);
-  row.appendChild(name);
-  row.appendChild(price);
-
-  // closure captures kidIndex and menuItem.id/price
-  (function(ki, mid, mp) {
-    row.addEventListener('click', function() {
-      var isNowSelected = !kidFood[ki][mid];
-      kidFood[ki][mid] = isNowSelected;
-      var rowEl = document.getElementById('fi-' + ki + '-' + mid);
-      var boxEl = document.getElementById('fc-' + ki + '-' + mid);
-      if (isNowSelected) {
-        rowEl.classList.add('selected');
-        boxEl.textContent = '✓';
-      } else {
-        rowEl.classList.remove('selected');
-        boxEl.textContent = '';
-      }
-      updateSummary();
-    });
-  })(kidIndex, menuItem.id, menuItem.price);
-
-  return row;
-}
-
-// ── Summary ───────────────────────────────────────────────
-function getSmallKidsTotal() {
-  var total = 0;
-  for (var ki in kidFood) {
-    for (var mid in kidFood[ki]) {
-      if (kidFood[ki][mid]) {
-        for (var m = 0; m < FOOD_MENU.length; m++) {
-          if (FOOD_MENU[m].id === mid) { total += FOOD_MENU[m].price; break; }
-        }
-      }
-    }
-  }
-  return total;
-}
-
 function updateSummary() {
-  var rows = document.getElementById('summary-rows');
-  var html = '';
-  var total = 0;
-  if (counts.adults > 0) {
-    var v = counts.adults * 13;
-    html += '<div class="summary-row"><span>Adults × ' + counts.adults + '</span><span>€' + v.toFixed(2) + '</span></div>';
-    total += v;
-  }
-  if (counts.bigkids > 0) {
-    var v2 = counts.bigkids * 10;
-    html += '<div class="summary-row"><span>Children 8–17 × ' + counts.bigkids + '</span><span>€' + v2.toFixed(2) + '</span></div>';
-    total += v2;
-  }
-  if (counts.smallkids > 0) {
-    var v3 = getSmallKidsTotal();
-    html += '<div class="summary-row"><span>Children 0–7 food</span><span>€' + v3.toFixed(2) + '</span></div>';
-    total += v3;
-  }
-  if (html === '') {
-    rows.innerHTML = '<div class="summary-row"><span style="color:#BBA898">No attendees selected yet</span></div>';
-    return;
-  }
-  html += '<div class="summary-row total"><span>Total</span><span>€' + total.toFixed(2) + '</span></div>';
+  var rows = document.getElementById('summary-rows'); var html = ''; var total = 0;
+  if (counts.adults > 0)    { var v = counts.adults*13;   html += '<div class="summary-row"><span>Adults × '+counts.adults+'</span><span>€'+v.toFixed(2)+'</span></div>'; total += v; }
+  if (counts.bigkids > 0)   { var v2 = counts.bigkids*10; html += '<div class="summary-row"><span>Children 8–17 × '+counts.bigkids+'</span><span>€'+v2.toFixed(2)+'</span></div>'; total += v2; }
+  if (counts.smallkids > 0) { var v3 = getSmallKidsTotal(); html += '<div class="summary-row"><span>Children 0–7 food</span><span>€'+v3.toFixed(2)+'</span></div>'; total += v3; }
+  if (!html) { rows.innerHTML = '<div class="summary-row"><span style="color:#BBA898">No attendees selected yet</span></div>'; return; }
+  html += '<div class="summary-row total"><span>Total</span><span>€'+total.toFixed(2)+'</span></div>';
   rows.innerHTML = html;
 }
 
-// ── Payment ───────────────────────────────────────────────
 function togglePayOption(type) {
   var chk = document.getElementById('chk-' + type);
   var opt = document.getElementById('pay-' + type);
   if (chk.checked) opt.classList.add('selected'); else opt.classList.remove('selected');
-  if (type === 'bank') {
-    document.getElementById('bank-details').style.display = chk.checked ? 'block' : 'none';
-  }
+  if (type === 'bank') document.getElementById('bank-details').style.display = chk.checked ? 'block' : 'none';
   if (type === 'voucher') {
     document.getElementById('voucher-chips').style.display = chk.checked ? 'flex' : 'none';
-    if (!chk.checked) {
-      selectedVoucher = '';
-      document.querySelectorAll('.voucher-chip').forEach(function(c){ c.classList.remove('selected'); });
-    }
+    if (!chk.checked) { selectedVoucher = ''; document.querySelectorAll('.voucher-chip').forEach(function(c){ c.classList.remove('selected'); }); }
   }
-}
-
-function copyText(text, btn) {
-  navigator.clipboard.writeText(text).then(function() {
-    btn.textContent = 'Copied!';
-    btn.style.background = 'var(--green)';
-    setTimeout(function(){ btn.textContent = 'Copy'; btn.style.background = '#1A3A5C'; }, 2000);
-  });
 }
 
 function selectVoucher(name) {
@@ -858,70 +401,52 @@ function selectVoucher(name) {
   document.getElementById('chip-' + name.toLowerCase()).classList.add('selected');
 }
 
-// ── File upload ───────────────────────────────────────────
-function handleFiles(e) {
-  uploadedFiles = uploadedFiles.concat(Array.from(e.target.files));
-  renderFiles();
-}
+function handleFiles(e) { uploadedFiles = uploadedFiles.concat(Array.from(e.target.files)); renderFiles(); }
 function renderFiles() {
-  document.getElementById('file-list').innerHTML = uploadedFiles.map(function(f, i) {
-    return '<div class="file-chip">📄 ' + (f.name.length > 20 ? f.name.slice(0,18)+'…' : f.name) +
-           ' <span class="file-remove" onclick="removeFile(' + i + ')">×</span></div>';
+  document.getElementById('file-list').innerHTML = uploadedFiles.map(function(f,i) {
+    return '<div class="file-chip">📄 '+(f.name.length>20?f.name.slice(0,18)+'…':f.name)+' <span class="file-remove" onclick="removeFile('+i+')">×</span></div>';
   }).join('');
 }
-function removeFile(i) { uploadedFiles.splice(i, 1); renderFiles(); }
+function removeFile(i) { uploadedFiles.splice(i,1); renderFiles(); }
 
-// ── Submit ────────────────────────────────────────────────
+function copyText(text, btn) {
+  navigator.clipboard.writeText(text).then(function() {
+    btn.textContent = 'Copied!'; btn.style.background = '#1A7A4A';
+    setTimeout(function(){ btn.textContent = 'Copy'; btn.style.background = '#1A3A5C'; }, 2000);
+  });
+}
+
 function submitForm() {
   if (!document.getElementById('fname').value.trim() || !document.getElementById('lname').value.trim()) { alert('Please enter your full name.'); return; }
   var email = document.getElementById('email').value.trim();
   if (!email || !/\S+@\S+\.\S+/.test(email)) { alert('Please enter a valid email address.'); return; }
   if (!document.getElementById('phone').value.trim()) { alert('Please enter your phone number.'); return; }
   if (counts.adults + counts.bigkids + counts.smallkids === 0) { alert('Please add at least one attendee.'); return; }
-
-  var groups = [
-    { key: 'adults',    count: counts.adults },
-    { key: 'bigkids',   count: counts.bigkids },
-    { key: 'smallkids', count: counts.smallkids }
-  ];
+  var groups = [{key:'adults',count:counts.adults},{key:'bigkids',count:counts.bigkids},{key:'smallkids',count:counts.smallkids}];
   for (var g = 0; g < groups.length; g++) {
     for (var i = 0; i < groups[g].count; i++) {
-      var fn = document.getElementById('att-' + groups[g].key + '-' + i + '-fn');
-      var ln = document.getElementById('att-' + groups[g].key + '-' + i + '-ln');
-      if (!fn || !fn.value.trim() || !ln || !ln.value.trim()) {
-        alert('Please enter the full name for all attendees.'); fn && fn.focus(); return;
-      }
+      var fn = document.getElementById('att-'+groups[g].key+'-'+i+'-fn');
+      var ln = document.getElementById('att-'+groups[g].key+'-'+i+'-ln');
+      if (!fn||!fn.value.trim()||!ln||!ln.value.trim()) { alert('Please enter the full name for all attendees.'); fn&&fn.focus(); return; }
     }
   }
-
-  var bankChecked    = document.getElementById('chk-bank').checked;
+  var bankChecked = document.getElementById('chk-bank').checked;
   var voucherChecked = document.getElementById('chk-voucher').checked;
   if (!bankChecked && !voucherChecked) { alert('Please select at least one payment method.'); return; }
   if (voucherChecked && !selectedVoucher) { alert('Please select your voucher provider (ePassi, Edenred, or Smartum).'); return; }
 
-  // Build attendee names object
   var attendeeNames = {};
   groups.forEach(function(g) {
     attendeeNames[g.key] = [];
     for (var i = 0; i < g.count; i++) {
-      var fn = document.getElementById('att-' + g.key + '-' + i + '-fn').value.trim();
-      var ln = document.getElementById('att-' + g.key + '-' + i + '-ln').value.trim();
-      attendeeNames[g.key].push(fn + ' ' + ln);
+      attendeeNames[g.key].push(document.getElementById('att-'+g.key+'-'+i+'-fn').value.trim()+' '+document.getElementById('att-'+g.key+'-'+i+'-ln').value.trim());
     }
   });
 
-  // Build small kids food summary
-  var smallKidsFoodData = [];
-  var smallKidsFoodTotal = 0;
+  var smallKidsFoodData = []; var smallKidsFoodTotal = 0;
   for (var ki = 0; ki < counts.smallkids; ki++) {
-    var items = [];
-    var sel = kidFood[ki] || {};
-    FOOD_MENU.forEach(function(m) {
-      if (sel[m.id]) {
-        items.push({ id: m.id, label: m.label, price: m.price });
-        smallKidsFoodTotal += m.price;
-      }
-    });
+    var items = []; var sel = kidFood[ki] || {};
+    FOOD_MENU.forEach(function(m) { if (sel[m.id]) { items.push({id:m.id, label:m.label, price:m.price}); smallKidsFoodTotal += m.price; } });
     smallKidsFoodData.push(items);
   }
 
@@ -929,95 +454,37 @@ function submitForm() {
   if (bankChecked) paymentMethods.push('Bank Transfer');
   if (voucherChecked) paymentMethods.push('Cultural Voucher');
 
-  var payload = {
-    action: 'register',
-    firstName: document.getElementById('fname').value.trim(),
-    lastName:  document.getElementById('lname').value.trim(),
-    email:     email,
-    phone:     document.getElementById('phone').value.trim(),
-    counts:    counts,
-    attendeeNames: attendeeNames,
-    smallKidsFood: smallKidsFoodData,
-    smallKidsFoodTotal: smallKidsFoodTotal,
-    paymentMethods: paymentMethods,
-    voucherType: selectedVoucher
-  };
+  var payload = { action:'register', firstName:document.getElementById('fname').value.trim(), lastName:document.getElementById('lname').value.trim(), email:email, phone:document.getElementById('phone').value.trim(), counts:counts, attendeeNames:attendeeNames, smallKidsFood:smallKidsFoodData, smallKidsFoodTotal:smallKidsFoodTotal, paymentMethods:paymentMethods, voucherType:selectedVoucher };
 
-  // Disable button and show loading
-  var btn = document.querySelector('.submit-btn');
-  btn.disabled = true;
-  btn.textContent = '⏳ Submitting...';
+  var btn = document.querySelector('.submit-btn'); btn.disabled = true; btn.textContent = '⏳ Submitting...';
 
-  fetch(GAS_URL, {
-    method: 'POST',
-    body: JSON.stringify(payload)
-  })
-  .then(function(r) { return r.json(); })
+  fetch(GAS_URL, { method:'POST', body:JSON.stringify(payload) })
+  .then(function(r){ return r.json(); })
   .then(function(res) {
     if (res.status === 'success') {
-      var regId = res.regId;
-      // Upload screenshots if any
-      if (uploadedFiles.length > 0) {
-        uploadScreenshots(uploadedFiles, regId, 0, function() {
-          showSuccess(regId);
-        });
-      } else {
-        showSuccess(regId);
-      }
-    } else {
-      alert('Submission failed: ' + (res.message || 'Unknown error. Please try again.'));
-      btn.disabled = false;
-      btn.textContent = '🎉 Complete Registration';
-    }
+      if (uploadedFiles.length > 0) { uploadScreenshots(uploadedFiles, res.regId, 0, function(){ showSuccess(res.regId); }); }
+      else { showSuccess(res.regId); }
+    } else { alert('Submission failed: '+(res.message||'Please try again.')); btn.disabled=false; btn.textContent='🎉 Complete Registration'; }
   })
-  .catch(function(err) {
-    alert('Network error. Please check your connection and try again.');
-    btn.disabled = false;
-    btn.textContent = '🎉 Complete Registration';
-  });
+  .catch(function(){ alert('Network error. Please check your connection and try again.'); btn.disabled=false; btn.textContent='🎉 Complete Registration'; });
 }
 
 function uploadScreenshots(files, regId, index, onDone) {
   if (index >= files.length) { onDone(); return; }
-  var file = files[index];
-  var reader = new FileReader();
+  var file = files[index]; var reader = new FileReader();
   reader.onload = function(e) {
-    var base64 = e.target.result.split(',')[1];
-    fetch(GAS_URL, {
-      method: 'POST',
-      body: JSON.stringify({
-        action: 'uploadScreenshot',
-        regId: regId,
-        fileName: file.name,
-        mimeType: file.type,
-        fileData: base64
-      })
-    })
-    .then(function() {
-      uploadScreenshots(files, regId, index + 1, onDone);
-    })
-    .catch(function() {
-      uploadScreenshots(files, regId, index + 1, onDone);
-    });
+    fetch(GAS_URL, { method:'POST', body:JSON.stringify({ action:'uploadScreenshot', regId:regId, fileName:file.name, mimeType:file.type, fileData:e.target.result.split(',')[1] }) })
+    .then(function(){ uploadScreenshots(files, regId, index+1, onDone); })
+    .catch(function(){ uploadScreenshots(files, regId, index+1, onDone); });
   };
   reader.readAsDataURL(file);
 }
 
 function showSuccess(regId) {
   document.getElementById('main-form').style.display = 'none';
-  var s = document.getElementById('success-screen');
-  s.style.display = 'block';
-  s.innerHTML =
-    '<div class="success-icon">🎊</div>' +
-    '<div class="success-title">Registration Successful!</div>' +
-    '<div class="success-desc">' +
-    'Thank you for registering for the<br>' +
-    '<strong>Tamil New Year &amp; Ramzan 2026 Celebration!</strong><br><br>' +
-    'Your Registration ID: <strong style="color:#1A7A4A">' + regId + '</strong><br><br>' +
-    'A confirmation email has been sent to you.<br>' +
-    'Registration is confirmed after payment verification by FINTA. 🪷' +
-    '</div>';
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  var s = document.getElementById('success-screen'); s.style.display = 'block';
+  s.innerHTML = '<div class="success-icon">🎊</div><div class="success-title">Registration Successful!</div><div class="success-desc">Thank you for registering for the<br><strong>Tamil New Year &amp; Ramzan 2026 Celebration!</strong><br><br>Your Registration ID: <strong style="color:#1A7A4A">'+regId+'</strong><br><br>A confirmation email has been sent to you.<br>Registration is confirmed after payment verification by FINTA. 🪷</div>';
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 </script>
 </body>
