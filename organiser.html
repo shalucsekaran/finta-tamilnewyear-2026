@@ -233,11 +233,11 @@ function buildCard(r, i) {
   var initials = (r.firstName||'?').charAt(0) + (r.lastName||'?').charAt(0);
   var statusClass = 'status-' + (r.status||'pending').toLowerCase().replace(' ','-');
   var shots = (r.screenshots||'').split('\n').filter(function(s){ return s.trim(); });
-  var shotLinks = shots.map(function(s) {
-    var parts = s.split(': ');
-    var name = parts[0]||'Screenshot';
-    var url = parts.slice(1).join(': ')||'#';
-    return '<a class="screenshot-link" href="'+url+'" target="_blank">📎 '+name+'</a>';
+  var shotLinks = shots.map(function(s, idx) {
+    var colonIdx = s.indexOf(': ');
+    var name = colonIdx > -1 ? s.substring(0, colonIdx) : ('Screenshot ' + (idx+1));
+    var url  = colonIdx > -1 ? s.substring(colonIdx + 2) : s;
+    return '<a class="screenshot-link" href="'+url.trim()+'" target="_blank">📎 '+name+'</a>';
   }).join('');
 
   var editUrl = window.location.href.replace('organiser.html','') + 'edit.html?regId=' + encodeURIComponent(r.regId||'');
@@ -263,7 +263,7 @@ function buildCard(r, i) {
       '</div>' +
       (r.attendeeNames ? '<div style="margin-bottom:12px"><div class="screenshots-title">Attendees</div><div style="font-size:12px;color:var(--text);white-space:pre-line">'+(r.attendeeNames||'')+'</div></div>' : '') +
       (r.foodIdly||r.foodParotta||r.foodChicken||r.foodVeg||r.foodKesari ? '<div style="margin-bottom:12px"><div class="screenshots-title">Food (Children 0–7)</div><div class="food-pills">'+(r.foodIdly>0?'<span class="food-pill">Idly ×'+r.foodIdly+'</span>':'')+(r.foodParotta>0?'<span class="food-pill">Parotta ×'+r.foodParotta+'</span>':'')+(r.foodChicken>0?'<span class="food-pill">Chicken Roll ×'+r.foodChicken+'</span>':'')+(r.foodVeg>0?'<span class="food-pill">Veg Roll ×'+r.foodVeg+'</span>':'')+(r.foodKesari>0?'<span class="food-pill">Kesari ×'+r.foodKesari+'</span>':'')+'</div></div>' : '') +
-      (shotLinks ? '<div class="screenshots"><div class="screenshots-title">Payment Screenshots</div><div class="screenshot-links">'+shotLinks+'</div></div>' : '<div style="font-size:12px;color:#BBA898;margin-bottom:12px;">No screenshots uploaded.</div>') +
+      (shots.length > 0 ? '<div class="screenshots"><div class="screenshots-title">Payment Screenshots ('+shots.length+')</div><div class="screenshot-links">'+shotLinks+'</div></div>' : '<div style="font-size:12px;color:#BBA898;margin-bottom:12px;">No screenshots uploaded.</div>') +
       '<div class="action-row">' +
         '<button class="btn-verify" onclick="verifyReg(\''+r.regId+'\','+i+')" '+(r.status==='Verified'?'disabled':'')+'>✅ '+(r.status==='Verified'?'Verified':'Mark as Verified')+'</button>' +
         '<button class="btn-discrepancy" onclick="toggleDiscForm('+i+')" '+(r.status==='Verified'?'disabled':'')+'>⚠️ Send Discrepancy</button>' +
