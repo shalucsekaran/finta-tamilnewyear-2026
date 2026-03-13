@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FINTA — Update Registration</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+  :root { --saffron: #FF6B00; --saffron-light: #FFF3E8; --saffron-dark: #CC5500; --crimson: #C0392B; --green: #1A7A4A; --border: #E8DDD0; --bg: #FDFAF5; --text: #2C1810; --text-muted: #7A5C4E; --radius: 12px; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); }
+  .header { background: linear-gradient(135deg, #8B0000, #C0392B, #FF6B00); padding: 20px; text-align: center; }
+  .header h1 { font-size: 20px; color: #fff; font-weight: 700; }
+  .header p { font-size: 12px; color: #FFD700; margin-top: 4px; }
+  .container { max-width: 580px; margin: 24px auto; padding: 0 16px 40px; }
+  .alert { background: #FFF3CD; border: 1.5px solid #FFB800; border-radius: 10px; padding: 14px 16px; margin-bottom: 20px; font-size: 13px; color: #7A5500; line-height: 1.6; }
+  .alert strong { color: #5A3D00; display: block; margin-bottom: 4px; }
+  .card { background: #fff; border-radius: var(--radius); border: 1px solid var(--border); padding: 20px; margin-bottom: 16px; }
+  .card-title { font-size: 14px; font-weight: 600; color: var(--saffron-dark); margin-bottom: 14px; border-bottom: 1px solid var(--border); padding-bottom: 8px; }
+  .info-row { display: flex; justify-content: space-between; font-size: 13px; padding: 5px 0; border-bottom: 1px solid #F5EDE5; }
+  .info-row:last-child { border-bottom: none; }
+  .info-row span:first-child { color: var(--text-muted); font-weight: 500; }
+  .pay-option { display: flex; align-items: flex-start; gap: 12px; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 10px; cursor: pointer; background: var(--bg); margin-bottom: 8px; }
+  .pay-option.selected { border-color: var(--saffron); background: var(--saffron-light); }
+  .pay-label { font-size: 13px; font-weight: 600; }
+  .pay-desc { font-size: 11px; color: var(--text-muted); }
+  .voucher-options { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+  .voucher-chip { padding: 4px 12px; border-radius: 20px; border: 1.5px solid var(--border); font-size: 11px; font-weight: 600; cursor: pointer; background: #fff; }
+  .voucher-chip.selected { background: var(--saffron); color: #fff; border-color: var(--saffron); }
+  .upload-area { border: 2px dashed #D4A870; border-radius: 10px; padding: 20px; text-align: center; cursor: pointer; background: #FFFBF5; margin-bottom: 10px; font-size: 13px; color: var(--text-muted); }
+  .file-list { display: flex; flex-wrap: wrap; gap: 8px; }
+  .file-chip { display: flex; align-items: center; gap: 6px; background: #E8F5EE; border: 1px solid #8EC9A8; border-radius: 20px; padding: 4px 10px; font-size: 11px; color: var(--green); }
+  .submit-btn { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--crimson), var(--saffron)); color: #fff; border: none; border-radius: var(--radius); font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Poppins', sans-serif; margin-top: 8px; }
+  .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+  .success-box { text-align: center; padding: 40px 20px; }
+  .success-box .icon { font-size: 56px; margin-bottom: 12px; }
+  .success-box h2 { color: var(--green); font-size: 20px; margin-bottom: 8px; }
+  .success-box p { color: var(--text-muted); font-size: 13px; line-height: 1.7; }
+  .warning-box { background: #FFF3CD; border: 1.5px solid #FFB800; border-radius: 8px; padding: 10px 14px; margin-bottom: 10px; font-size: 12px; color: #7A5500; }
+  .warning-box strong { color: #5A3D00; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🪷 Update Your Registration</h1>
+  <p>Tamil New Year &amp; Ramzan 2026 — Finland Tamil Sangam ry</p>
+</div>
+
+<div class="container" id="main-container">
+  <div class="alert">
+    <strong>⚠️ Action Required</strong>
+    Our team has flagged an issue with your registration. Please review the details below, update your payment method and upload a new payment screenshot, then resubmit.
+  </div>
+
+  <div class="card" id="reg-details">
+    <div class="card-title">Your Registration Details</div>
+    <div style="text-align:center;color:var(--text-muted);font-size:13px;">Loading...</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Update Payment Method</div>
+    <div style="font-size:12px;color:var(--text-muted);margin-bottom:10px;">You can select both if paying partly by voucher and partly by bank transfer.</div>
+    <div class="warning-box">⚠️ <strong>Cultural vouchers are for personal use only.</strong> You may only use a voucher for yourself.</div>
+    <div class="pay-option" id="pay-bank" onclick="togglePay('bank')">
+      <input type="checkbox" id="chk-bank" onclick="event.stopPropagation();togglePay('bank')" />
+      <div><div class="pay-label">🏦 Bank Transfer</div><div class="pay-desc">Finland Tamil Sangam ry · IBAN: FI25 1544 3000 0023 73 · BIC: NDEAFIHH</div></div>
+    </div>
+    <div class="pay-option" id="pay-voucher" onclick="togglePay('voucher')">
+      <input type="checkbox" id="chk-voucher" onclick="event.stopPropagation();togglePay('voucher')" />
+      <div style="width:100%">
+        <div class="pay-label">🎫 Cultural Voucher <strong style="color:var(--crimson);font-size:11px;">— Personal Use Only</strong></div>
+        <div class="pay-desc">ePassi · Edenred · Smartum</div>
+        <div class="voucher-options" id="voucher-chips" style="display:none">
+          <span class="voucher-chip" id="chip-epassi"  onclick="event.stopPropagation();selectVoucher('ePassi')">ePassi</span>
+          <span class="voucher-chip" id="chip-edenred" onclick="event.stopPropagation();selectVoucher('Edenred')">Edenred</span>
+          <span class="voucher-chip" id="chip-smartum" onclick="event.stopPropagation();selectVoucher('Smartum')">Smartum</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Upload New Payment Screenshot(s)</div>
+    <div class="upload-area" onclick="document.getElementById('file-input').click()">📎 Click to upload · PNG, JPG, PDF · Multiple OK</div>
+    <input type="file" id="file-input" multiple accept="image/*,application/pdf" style="display:none" onchange="handleFiles(event)" />
+    <div class="file-list" id="file-list"></div>
+  </div>
+
+  <button class="submit-btn" onclick="resubmit()">📤 Resubmit Registration</button>
+</div>
+
+<script>
+var GAS_URL = "https://script.google.com/macros/s/AKfycbwg-mt9cZ4n17JP6wb3emVgRcQie2HzfCR_1s4wUMrHsSn7GT7vp-wwJM0XdZx7r-h5/exec";
+var regId = new URLSearchParams(window.location.search).get('regId') || '';
+var uploadedFiles = [];
+var selectedVoucher = '';
+
+// Load reg details
+fetch(GAS_URL, { method:'POST', body:JSON.stringify({ action:'getRegistrations' }) })
+.then(function(r){ return r.json(); })
+.then(function(res) {
+  var reg = (res.data||[]).find(function(r){ return r.regId === regId; });
+  var el = document.getElementById('reg-details');
+  if (!reg) { el.innerHTML = '<div style="color:var(--crimson);font-size:13px;">Registration not found. Please check your link.</div>'; return; }
+  el.innerHTML = '<div class="card-title">Your Registration Details</div>' +
+    '<div class="info-row"><span>Name</span><span>'+(reg.firstName||'')+' '+(reg.lastName||'')+'</span></div>' +
+    '<div class="info-row"><span>Registration ID</span><span>'+(reg.regId||'')+'</span></div>' +
+    '<div class="info-row"><span>Adults</span><span>'+(reg.adults||0)+'</span></div>' +
+    '<div class="info-row"><span>Children 8–17</span><span>'+(reg.bigkids||0)+'</span></div>' +
+    '<div class="info-row"><span>Children 0–7</span><span>'+(reg.smallkids||0)+'</span></div>' +
+    '<div class="info-row"><span>Grand Total</span><span style="font-weight:700;color:var(--saffron-dark)">€'+(reg.grandTotal||'0.00')+'</span></div>';
+});
+
+function togglePay(type) {
+  var chk = document.getElementById('chk-' + type);
+  var opt = document.getElementById('pay-' + type);
+  if (chk.checked) opt.classList.add('selected'); else opt.classList.remove('selected');
+  if (type === 'voucher') {
+    document.getElementById('voucher-chips').style.display = chk.checked ? 'flex' : 'none';
+    if (!chk.checked) { selectedVoucher = ''; document.querySelectorAll('.voucher-chip').forEach(function(c){ c.classList.remove('selected'); }); }
+  }
+}
+
+function selectVoucher(name) {
+  selectedVoucher = name;
+  document.querySelectorAll('.voucher-chip').forEach(function(c){ c.classList.remove('selected'); });
+  document.getElementById('chip-' + name.toLowerCase()).classList.add('selected');
+}
+
+function handleFiles(e) { uploadedFiles = uploadedFiles.concat(Array.from(e.target.files)); renderFiles(); }
+function renderFiles() {
+  document.getElementById('file-list').innerHTML = uploadedFiles.map(function(f,i){
+    return '<div class="file-chip">📄 '+(f.name.length>20?f.name.slice(0,18)+'…':f.name)+'</div>';
+  }).join('');
+}
+
+function resubmit() {
+  if (!document.getElementById('chk-bank').checked && !document.getElementById('chk-voucher').checked) { alert('Please select a payment method.'); return; }
+  if (document.getElementById('chk-voucher').checked && !selectedVoucher) { alert('Please select your voucher type.'); return; }
+  if (!regId) { alert('Invalid registration link.'); return; }
+
+  var btn = document.querySelector('.submit-btn'); btn.disabled = true; btn.textContent = '⏳ Submitting...';
+  var methods = [];
+  if (document.getElementById('chk-bank').checked) methods.push('Bank Transfer');
+  if (document.getElementById('chk-voucher').checked) methods.push('Cultural Voucher');
+
+  fetch(GAS_URL, { method:'POST', body: JSON.stringify({ action:'resubmit', regId:regId, paymentMethods:methods, voucherType:selectedVoucher }) })
+  .then(function(r){ return r.json(); })
+  .then(function(res) {
+    if (res.status === 'success') {
+      if (uploadedFiles.length > 0) uploadScreenshots(uploadedFiles, regId, 0, showSuccess);
+      else showSuccess();
+    } else { alert('Error: '+(res.message||'Please try again.')); btn.disabled=false; btn.textContent='📤 Resubmit Registration'; }
+  })
+  .catch(function(){ alert('Network error.'); btn.disabled=false; btn.textContent='📤 Resubmit Registration'; });
+}
+
+function uploadScreenshots(files, regId, index, onDone) {
+  if (index >= files.length) { onDone(); return; }
+  var file = files[index]; var reader = new FileReader();
+  reader.onload = function(e) {
+    fetch(GAS_URL, { method:'POST', body: JSON.stringify({ action:'uploadScreenshot', regId:regId, fileName:file.name, mimeType:file.type, fileData:e.target.result.split(',')[1] }) })
+    .then(function(){ uploadScreenshots(files, regId, index+1, onDone); });
+  };
+  reader.readAsDataURL(file);
+}
+
+function showSuccess() {
+  document.getElementById('main-container').innerHTML =
+    '<div class="success-box"><div class="icon">✅</div><h2>Resubmission Received!</h2>' +
+    '<p>Thank you for updating your registration.<br>Our team will review it shortly and you will receive a confirmation email.<br><br><strong>Registration ID: '+regId+'</strong></p></div>';
+}
+</script>
+</body>
+</html>

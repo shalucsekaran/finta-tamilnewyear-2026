@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FINTA Organiser — Tamil New Year & Ramzan 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+  :root {
+    --red: #8B0000; --saffron: #FF6B00; --saffron-light: #FFF3E8;
+    --gold: #D4AF37; --green: #1A7A4A; --green-light: #E8F5EE;
+    --crimson: #C0392B; --border: #E8DDD0; --bg: #FDFAF5;
+    --text: #2C1810; --text-muted: #7A5C4E; --radius: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Poppins', sans-serif; background: var(--bg); color: var(--text); }
+
+  /* Login */
+  .login-wrap { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #8B0000, #C0392B, #FF6B00); }
+  .login-card { background: #fff; border-radius: 16px; padding: 36px 32px; width: 100%; max-width: 380px; box-shadow: 0 8px 32px rgba(0,0,0,0.2); text-align: center; }
+  .login-logo { font-size: 48px; margin-bottom: 8px; }
+  .login-title { font-size: 18px; font-weight: 700; color: var(--red); margin-bottom: 4px; }
+  .login-sub { font-size: 12px; color: var(--text-muted); margin-bottom: 24px; }
+  .login-field { margin-bottom: 14px; text-align: left; }
+  .login-field label { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 5px; }
+  .login-field input { width: 100%; padding: 10px 13px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 14px; font-family: 'Poppins', sans-serif; outline: none; }
+  .login-field input:focus { border-color: var(--saffron); }
+  .login-btn { width: 100%; padding: 12px; background: linear-gradient(135deg, var(--red), var(--saffron)); color: #fff; border: none; border-radius: 8px; font-size: 14px; font-weight: 700; font-family: 'Poppins', sans-serif; cursor: pointer; margin-top: 4px; }
+  .login-err { color: var(--crimson); font-size: 12px; margin-top: 8px; display: none; }
+
+  /* Dashboard */
+  .dashboard { display: none; }
+  .topbar { background: linear-gradient(135deg, #8B0000, #C0392B); padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; }
+  .topbar-title { font-size: 15px; font-weight: 700; color: #fff; }
+  .topbar-sub { font-size: 11px; color: rgba(255,220,150,0.9); }
+  .logout-btn { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 12px; cursor: pointer; font-family: 'Poppins', sans-serif; }
+
+  .dash-body { max-width: 1100px; margin: 0 auto; padding: 20px 16px 40px; }
+  .stats-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .stat-card { background: #fff; border-radius: var(--radius); border: 1px solid var(--border); padding: 14px 16px; text-align: center; }
+  .stat-num { font-size: 28px; font-weight: 700; color: var(--saffron); }
+  .stat-label { font-size: 11px; color: var(--text-muted); font-weight: 500; margin-top: 2px; }
+
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; align-items: center; }
+  .filter-btn { padding: 6px 14px; border-radius: 20px; border: 1.5px solid var(--border); background: #fff; font-size: 12px; font-weight: 600; cursor: pointer; font-family: 'Poppins', sans-serif; color: var(--text-muted); }
+  .filter-btn.active { background: var(--saffron); color: #fff; border-color: var(--saffron); }
+  .search-box { margin-left: auto; padding: 7px 13px; border: 1.5px solid var(--border); border-radius: 20px; font-size: 13px; font-family: 'Poppins', sans-serif; outline: none; width: 200px; }
+  .search-box:focus { border-color: var(--saffron); }
+
+  .reg-list { display: flex; flex-direction: column; gap: 12px; }
+  .reg-card { background: #fff; border-radius: var(--radius); border: 1px solid var(--border); overflow: hidden; }
+  .reg-card-header { padding: 14px 16px; display: flex; align-items: center; gap: 12px; cursor: pointer; }
+  .reg-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--saffron-light); display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; color: var(--saffron); flex-shrink: 0; }
+  .reg-name { font-size: 14px; font-weight: 600; color: var(--text); }
+  .reg-meta { font-size: 11px; color: var(--text-muted); }
+  .reg-status { margin-left: auto; padding: 4px 12px; border-radius: 20px; font-size: 11px; font-weight: 600; flex-shrink: 0; }
+  .status-pending  { background: #FFF3CD; color: #7A5500; }
+  .status-verified { background: var(--green-light); color: var(--green); }
+  .status-discrepancy { background: #FDECEA; color: var(--crimson); }
+  .reg-chevron { font-size: 12px; color: var(--text-muted); margin-left: 8px; }
+
+  .reg-card-body { display: none; border-top: 1px solid var(--border); padding: 16px; }
+  .reg-card-body.open { display: block; }
+
+  .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 16px; margin-bottom: 14px; }
+  @media (max-width: 500px) { .detail-grid { grid-template-columns: 1fr; } }
+  .detail-row { font-size: 12px; }
+  .detail-row span:first-child { color: var(--text-muted); font-weight: 600; }
+  .detail-row span:last-child { color: var(--text); }
+
+  .screenshots { margin-bottom: 14px; }
+  .screenshots-title { font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .screenshot-links { display: flex; flex-wrap: wrap; gap: 8px; }
+  .screenshot-link { display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px; background: #E8F0FF; border: 1px solid #B8CFF0; border-radius: 20px; font-size: 11px; color: #1A3A8C; text-decoration: none; font-weight: 500; }
+
+  .action-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 4px; }
+  .btn-verify { padding: 8px 18px; background: var(--green); color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Poppins', sans-serif; }
+  .btn-discrepancy { padding: 8px 18px; background: var(--crimson); color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Poppins', sans-serif; }
+  .btn-verify:disabled, .btn-discrepancy:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .disc-form { margin-top: 12px; display: none; background: #FFF5F5; border: 1px solid #F5C0C0; border-radius: 8px; padding: 12px; }
+  .disc-form.open { display: block; }
+  .disc-form textarea { width: 100%; padding: 10px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 13px; font-family: 'Poppins', sans-serif; resize: vertical; min-height: 80px; outline: none; }
+  .disc-form textarea:focus { border-color: var(--crimson); }
+  .disc-send-btn { margin-top: 8px; padding: 8px 18px; background: var(--crimson); color: #fff; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Poppins', sans-serif; }
+
+  .food-pills { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 4px; }
+  .food-pill { padding: 3px 10px; background: var(--saffron-light); border: 1px solid #F0C080; border-radius: 20px; font-size: 11px; color: var(--saffron); font-weight: 500; }
+
+  .empty-state { text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px; }
+  .loading { text-align: center; padding: 40px; color: var(--text-muted); }
+  .refresh-btn { padding: 8px 18px; background: var(--saffron-light); border: 1.5px solid var(--saffron); color: var(--saffron); border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Poppins', sans-serif; }
+</style>
+</head>
+<body>
+
+<!-- Login -->
+<div class="login-wrap" id="login-wrap">
+  <div class="login-card">
+    <div class="login-logo">🪷</div>
+    <div class="login-title">FINTA Organiser Portal</div>
+    <div class="login-sub">Tamil New Year &amp; Ramzan 2026</div>
+    <div class="login-field">
+      <label>Username</label>
+      <input type="text" id="login-user" placeholder="organiser" />
+    </div>
+    <div class="login-field">
+      <label>Password</label>
+      <input type="password" id="login-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()" />
+    </div>
+    <button class="login-btn" onclick="doLogin()">Sign In</button>
+    <div class="login-err" id="login-err">Incorrect username or password.</div>
+  </div>
+</div>
+
+<!-- Dashboard -->
+<div class="dashboard" id="dashboard">
+  <div class="topbar">
+    <div>
+      <div class="topbar-title">🪷 FINTA Organiser Dashboard</div>
+      <div class="topbar-sub">Tamil New Year &amp; Ramzan 2026</div>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button class="refresh-btn" onclick="loadRegistrations()">↻ Refresh</button>
+      <button class="logout-btn" onclick="doLogout()">Sign Out</button>
+    </div>
+  </div>
+
+  <div class="dash-body">
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-num" id="stat-total">—</div><div class="stat-label">Total Registrations</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-pending" style="color:#B8860B">—</div><div class="stat-label">Pending</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-verified" style="color:var(--green)">—</div><div class="stat-label">Verified</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-disc" style="color:var(--crimson)">—</div><div class="stat-label">Discrepancy</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-adults" style="color:var(--saffron)">—</div><div class="stat-label">Total Adults</div></div>
+      <div class="stat-card"><div class="stat-num" id="stat-kids" style="color:var(--saffron)">—</div><div class="stat-label">Total Children</div></div>
+    </div>
+
+    <div class="filters">
+      <button class="filter-btn active" onclick="setFilter('All',this)">All</button>
+      <button class="filter-btn" onclick="setFilter('Pending',this)">Pending</button>
+      <button class="filter-btn" onclick="setFilter('Verified',this)">Verified</button>
+      <button class="filter-btn" onclick="setFilter('Discrepancy',this)">Discrepancy</button>
+      <input class="search-box" id="search-box" placeholder="🔍 Search name / email..." oninput="renderList()" />
+    </div>
+
+    <div class="reg-list" id="reg-list"><div class="loading">Loading registrations...</div></div>
+  </div>
+</div>
+
+<script>
+var GAS_URL = "https://script.google.com/macros/s/AKfycbwg-mt9cZ4n17JP6wb3emVgRcQie2HzfCR_1s4wUMrHsSn7GT7vp-wwJM0XdZx7r-h5/exec";
+var PASSWORD = "Finta@2026";
+var USERNAME = "organiser";
+var allRegs = [];
+var currentFilter = "All";
+
+function doLogin() {
+  var u = document.getElementById('login-user').value.trim();
+  var p = document.getElementById('login-pass').value;
+  if (u === USERNAME && p === PASSWORD) {
+    document.getElementById('login-wrap').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    loadRegistrations();
+  } else {
+    var err = document.getElementById('login-err');
+    err.style.display = 'block';
+    setTimeout(function(){ err.style.display = 'none'; }, 3000);
+  }
+}
+
+function doLogout() {
+  document.getElementById('login-wrap').style.display = 'flex';
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('login-pass').value = '';
+  allRegs = [];
+}
+
+function loadRegistrations() {
+  document.getElementById('reg-list').innerHTML = '<div class="loading">⏳ Loading registrations...</div>';
+  fetch(GAS_URL, { method: 'POST', body: JSON.stringify({ action: 'getRegistrations' }) })
+  .then(function(r){ return r.json(); })
+  .then(function(res) {
+    if (res.status === 'success') {
+      allRegs = res.data || [];
+      updateStats();
+      renderList();
+    } else {
+      document.getElementById('reg-list').innerHTML = '<div class="empty-state">Failed to load: ' + (res.message||'Unknown error') + '</div>';
+    }
+  })
+  .catch(function(e){
+    document.getElementById('reg-list').innerHTML = '<div class="empty-state">Network error. Please try again.</div>';
+  });
+}
+
+function updateStats() {
+  var pending = allRegs.filter(function(r){ return r.status==='Pending'; }).length;
+  var verified = allRegs.filter(function(r){ return r.status==='Verified'; }).length;
+  var disc = allRegs.filter(function(r){ return r.status==='Discrepancy'; }).length;
+  var adults = allRegs.reduce(function(s,r){ return s + (parseInt(r.adults)||0); }, 0);
+  var kids = allRegs.reduce(function(s,r){ return s + (parseInt(r.bigkids)||0) + (parseInt(r.smallkids)||0); }, 0);
+  document.getElementById('stat-total').textContent = allRegs.length;
+  document.getElementById('stat-pending').textContent = pending;
+  document.getElementById('stat-verified').textContent = verified;
+  document.getElementById('stat-disc').textContent = disc;
+  document.getElementById('stat-adults').textContent = adults;
+  document.getElementById('stat-kids').textContent = kids;
+}
+
+function setFilter(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderList();
+}
+
+function renderList() {
+  var search = document.getElementById('search-box').value.toLowerCase();
+  var filtered = allRegs.filter(function(r) {
+    var matchFilter = currentFilter === 'All' || r.status === currentFilter;
+    var matchSearch = !search || (r.firstName+' '+r.lastName+' '+r.email).toLowerCase().includes(search);
+    return matchFilter && matchSearch;
+  });
+  var list = document.getElementById('reg-list');
+  if (filtered.length === 0) { list.innerHTML = '<div class="empty-state">No registrations found.</div>'; return; }
+  list.innerHTML = filtered.map(function(r, i) { return buildCard(r, i); }).join('');
+}
+
+function buildCard(r, i) {
+  var initials = (r.firstName||'?').charAt(0) + (r.lastName||'?').charAt(0);
+  var statusClass = 'status-' + (r.status||'pending').toLowerCase().replace(' ','-');
+  var shots = (r.screenshots||'').split('\n').filter(function(s){ return s.trim(); });
+  var shotLinks = shots.map(function(s) {
+    var parts = s.split(': ');
+    var name = parts[0]||'Screenshot';
+    var url = parts.slice(1).join(': ')||'#';
+    return '<a class="screenshot-link" href="'+url+'" target="_blank">📎 '+name+'</a>';
+  }).join('');
+
+  var editUrl = window.location.href.replace('organiser.html','') + 'edit.html?regId=' + encodeURIComponent(r.regId||'');
+
+  return '<div class="reg-card" id="card-'+i+'">' +
+    '<div class="reg-card-header" onclick="toggleCard('+i+')">' +
+      '<div class="reg-avatar">'+initials.toUpperCase()+'</div>' +
+      '<div><div class="reg-name">'+(r.firstName||'')+' '+(r.lastName||'')+'</div>' +
+      '<div class="reg-meta">'+(r.email||'')+' · '+(r.timestamp||'')+'</div></div>' +
+      '<span class="reg-status '+statusClass+'">'+(r.status||'Pending')+'</span>' +
+      '<span class="reg-chevron" id="chev-'+i+'">▼</span>' +
+    '</div>' +
+    '<div class="reg-card-body" id="body-'+i+'">' +
+      '<div class="detail-grid">' +
+        '<div class="detail-row"><span>Reg ID: </span><span>'+(r.regId||'—')+'</span></div>' +
+        '<div class="detail-row"><span>Phone: </span><span>'+(r.phone||'—')+'</span></div>' +
+        '<div class="detail-row"><span>Adults: </span><span>'+(r.adults||0)+' · €'+(((parseInt(r.adults)||0)*13).toFixed(2))+'</span></div>' +
+        '<div class="detail-row"><span>Children 8–17: </span><span>'+(r.bigkids||0)+' · €'+(((parseInt(r.bigkids)||0)*10).toFixed(2))+'</span></div>' +
+        '<div class="detail-row"><span>Children 0–7: </span><span>'+(r.smallkids||0)+'</span></div>' +
+        '<div class="detail-row"><span>Payment: </span><span>'+(r.paymentMethod||'—')+' '+(r.voucherType&&r.voucherType!=='-'?'('+r.voucherType+')':'')+'</span></div>' +
+        '<div class="detail-row"><span>Grand Total: </span><span style="font-weight:700;color:var(--saffron-dark)">€'+(r.grandTotal||'0.00')+'</span></div>' +
+        '<div class="detail-row"><span>Status: </span><span>'+(r.status||'Pending')+'</span></div>' +
+      '</div>' +
+      (r.attendeeNames ? '<div style="margin-bottom:12px"><div class="screenshots-title">Attendees</div><div style="font-size:12px;color:var(--text);white-space:pre-line">'+(r.attendeeNames||'')+'</div></div>' : '') +
+      (r.foodIdly||r.foodParotta||r.foodChicken||r.foodVeg||r.foodKesari ? '<div style="margin-bottom:12px"><div class="screenshots-title">Food (Children 0–7)</div><div class="food-pills">'+(r.foodIdly>0?'<span class="food-pill">Idly ×'+r.foodIdly+'</span>':'')+(r.foodParotta>0?'<span class="food-pill">Parotta ×'+r.foodParotta+'</span>':'')+(r.foodChicken>0?'<span class="food-pill">Chicken Roll ×'+r.foodChicken+'</span>':'')+(r.foodVeg>0?'<span class="food-pill">Veg Roll ×'+r.foodVeg+'</span>':'')+(r.foodKesari>0?'<span class="food-pill">Kesari ×'+r.foodKesari+'</span>':'')+'</div></div>' : '') +
+      (shotLinks ? '<div class="screenshots"><div class="screenshots-title">Payment Screenshots</div><div class="screenshot-links">'+shotLinks+'</div></div>' : '<div style="font-size:12px;color:#BBA898;margin-bottom:12px;">No screenshots uploaded.</div>') +
+      '<div class="action-row">' +
+        '<button class="btn-verify" onclick="verifyReg(\''+r.regId+'\','+i+')" '+(r.status==='Verified'?'disabled':'')+'>✅ '+(r.status==='Verified'?'Verified':'Mark as Verified')+'</button>' +
+        '<button class="btn-discrepancy" onclick="toggleDiscForm('+i+')" '+(r.status==='Verified'?'disabled':'')+'>⚠️ Send Discrepancy</button>' +
+      '</div>' +
+      '<div class="disc-form" id="disc-'+i+'">' +
+        '<div style="font-size:12px;font-weight:600;color:var(--crimson);margin-bottom:6px;">Discrepancy Message to '+(r.firstName||'Participant')+'</div>' +
+        '<textarea id="disc-msg-'+i+'" placeholder="Describe the issue with the payment or registration..."></textarea>' +
+        '<div style="font-size:11px;color:var(--text-muted);margin-top:4px;">An edit link will be included in the email for the participant to resubmit.</div>' +
+        '<button class="disc-send-btn" onclick="sendDiscrepancy(\''+r.regId+'\',\''+r.email+'\',\''+r.firstName+'\','+i+')">Send Email</button>' +
+      '</div>' +
+    '</div>' +
+  '</div>';
+}
+
+function toggleCard(i) {
+  var body = document.getElementById('body-'+i);
+  var chev = document.getElementById('chev-'+i);
+  var isOpen = body.classList.contains('open');
+  body.classList.toggle('open');
+  chev.textContent = isOpen ? '▼' : '▲';
+}
+
+function toggleDiscForm(i) {
+  var f = document.getElementById('disc-'+i);
+  f.classList.toggle('open');
+}
+
+function verifyReg(regId, i) {
+  var btn = document.querySelector('#card-'+i+' .btn-verify');
+  btn.disabled = true; btn.textContent = '⏳ Verifying...';
+  fetch(GAS_URL, { method:'POST', body: JSON.stringify({ action:'verifyRegistration', regId: regId }) })
+  .then(function(r){ return r.json(); })
+  .then(function(res) {
+    if (res.status === 'success') {
+      allRegs.forEach(function(r){ if(r.regId===regId){ r.status='Verified'; } });
+      updateStats(); renderList();
+    } else { alert('Error: '+(res.message||'Please try again.')); btn.disabled=false; btn.textContent='✅ Mark as Verified'; }
+  })
+  .catch(function(){ alert('Network error.'); btn.disabled=false; btn.textContent='✅ Mark as Verified'; });
+}
+
+function sendDiscrepancy(regId, email, firstName, i) {
+  var msg = document.getElementById('disc-msg-'+i).value.trim();
+  if (!msg) { alert('Please enter a discrepancy message.'); return; }
+  var btn = document.querySelector('#disc-'+i+' .disc-send-btn');
+  btn.disabled=true; btn.textContent='⏳ Sending...';
+  fetch(GAS_URL, { method:'POST', body: JSON.stringify({ action:'sendDiscrepancy', regId:regId, email:email, firstName:firstName, message:msg }) })
+  .then(function(r){ return r.json(); })
+  .then(function(res) {
+    if (res.status==='success') {
+      alert('Discrepancy email sent to '+email);
+      allRegs.forEach(function(r){ if(r.regId===regId){ r.status='Discrepancy'; } });
+      updateStats(); renderList();
+    } else { alert('Error: '+(res.message||'Please try again.')); btn.disabled=false; btn.textContent='Send Email'; }
+  })
+  .catch(function(){ alert('Network error.'); btn.disabled=false; btn.textContent='Send Email'; });
+}
+</script>
+</body>
+</html>
