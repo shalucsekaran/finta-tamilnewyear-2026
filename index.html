@@ -28,7 +28,17 @@
   .header-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; padding: 10px 16px; background: #6B0000; }
   .badge { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,215,0,0.4); border-radius: 20px; padding: 5px 14px; font-size: 12px; color: #FFE9A0; }
 
-  /* ── Form ── */
+  /* Sticky total bar */
+  .sticky-total {
+    position: sticky; top: 0; z-index: 99;
+    background: linear-gradient(135deg, #8B0000, #CC5500);
+    padding: 10px 20px;
+    display: flex; align-items: center; justify-content: space-between;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+  .sticky-total-label { font-size: 12px; color: rgba(255,220,150,0.9); font-weight: 500; }
+  .sticky-total-amount { font-size: 20px; font-weight: 700; color: #FFD700; letter-spacing: 1px; }
+  .sticky-total-breakdown { font-size: 11px; color: rgba(255,220,150,0.75); margin-top: 1px; }
   .form-container { max-width: 680px; margin: 0 auto; padding: 20px 16px 40px; }
   .section-card { background: var(--card); border-radius: var(--radius); border: 1px solid var(--border); box-shadow: var(--shadow); margin-bottom: 16px; overflow: hidden; }
   .section-header { padding: 14px 18px; background: linear-gradient(90deg, var(--saffron-light), #fff); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
@@ -128,6 +138,15 @@
   </div>
 </div>
 
+<!-- Sticky total bar -->
+<div class="sticky-total" id="sticky-total">
+  <div>
+    <div class="sticky-total-label">Total Amount</div>
+    <div class="sticky-total-breakdown" id="sticky-breakdown">Select attendees to see cost</div>
+  </div>
+  <div class="sticky-total-amount" id="sticky-amount">€0.00</div>
+</div>
+
 <!-- Form -->
 <div class="form-container" id="main-form">
 
@@ -147,12 +166,6 @@
         <div class="field"><label>Phone Number <span class="required">*</span></label><input type="tel" id="phone" placeholder="+358 40 123 4567" /></div>
       </div>
     </div>
-  </div>
-
-  <!-- Summary -->
-  <div class="summary-card" id="summary-card-top">
-    <div class="summary-title">Order Summary</div>
-    <div id="summary-rows"><div class="summary-row"><span style="color:#BBA898">No attendees selected yet</span></div></div>
   </div>
 
   <!-- Tickets -->
@@ -216,6 +229,12 @@
       <div><div class="section-title">Attendee Names</div><div class="char-tip">Full name of each participant</div></div>
     </div>
     <div class="section-body" id="attendee-names"></div>
+  </div>
+
+  <!-- Order Summary -->
+  <div class="summary-card">
+    <div class="summary-title">Order Summary</div>
+    <div id="summary-rows"><div class="summary-row"><span style="color:#BBA898">No attendees selected yet</span></div></div>
   </div>
 
   <!-- Payment -->
@@ -377,12 +396,20 @@ function buildAttendeeNames() {
 
 function updateSummary() {
   var rows = document.getElementById('summary-rows'); var html = ''; var total = 0;
-  if (counts.adults > 0)    { var v = counts.adults*13;   html += '<div class="summary-row"><span>Adults × '+counts.adults+'</span><span>€'+v.toFixed(2)+'</span></div>'; total += v; }
-  if (counts.bigkids > 0)   { var v2 = counts.bigkids*10; html += '<div class="summary-row"><span>Children 8–17 × '+counts.bigkids+'</span><span>€'+v2.toFixed(2)+'</span></div>'; total += v2; }
-  if (counts.smallkids > 0) { var v3 = getSmallKidsTotal(); html += '<div class="summary-row"><span>Children 0–7 food</span><span>€'+v3.toFixed(2)+'</span></div>'; total += v3; }
-  if (!html) { rows.innerHTML = '<div class="summary-row"><span style="color:#BBA898">No attendees selected yet</span></div>'; return; }
+  var parts = [];
+  if (counts.adults > 0)    { var v = counts.adults*13;   html += '<div class="summary-row"><span>Adults × '+counts.adults+' (€13 each)</span><span>€'+v.toFixed(2)+'</span></div>'; total += v; parts.push(counts.adults+' adult'+(counts.adults>1?'s':'')); }
+  if (counts.bigkids > 0)   { var v2 = counts.bigkids*10; html += '<div class="summary-row"><span>Children 8–17 × '+counts.bigkids+' (€10 each)</span><span>€'+v2.toFixed(2)+'</span></div>'; total += v2; parts.push(counts.bigkids+' child'+(counts.bigkids>1?'ren':'')+' (8–17)'); }
+  if (counts.smallkids > 0) { var v3 = getSmallKidsTotal(); html += '<div class="summary-row"><span>Children 0–7 food × '+counts.smallkids+'</span><span>€'+v3.toFixed(2)+'</span></div>'; total += v3; if(v3>0) parts.push('food €'+v3.toFixed(2)); }
+  if (!html) {
+    rows.innerHTML = '<div class="summary-row"><span style="color:#BBA898">No attendees selected yet</span></div>';
+    document.getElementById('sticky-amount').textContent = '€0.00';
+    document.getElementById('sticky-breakdown').textContent = 'Select attendees to see cost';
+    return;
+  }
   html += '<div class="summary-row total"><span>Total</span><span>€'+total.toFixed(2)+'</span></div>';
   rows.innerHTML = html;
+  document.getElementById('sticky-amount').textContent = '€'+total.toFixed(2);
+  document.getElementById('sticky-breakdown').textContent = parts.join(' · ');
 }
 
 function togglePayOption(type) {
