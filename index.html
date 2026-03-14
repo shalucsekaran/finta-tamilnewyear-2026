@@ -28,7 +28,22 @@
   .header-badges { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; padding: 10px 16px; background: #6B0000; }
   .badge { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,215,0,0.4); border-radius: 20px; padding: 5px 14px; font-size: 12px; color: #FFE9A0; }
 
-  /* Sticky total bar */
+  .event-details {
+    background: #fff;
+    border-bottom: 3px solid #D4AF37;
+    padding: 14px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 10px;
+  }
+  .event-detail-item {
+    display: flex; align-items: flex-start; gap: 8px;
+  }
+  .event-detail-icon {
+    font-size: 18px; flex-shrink: 0; margin-top: 1px;
+  }
+  .event-detail-text { font-size: 12px; color: var(--text); line-height: 1.5; }
+  .event-detail-text strong { color: #8B0000; font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; display: block; }
   .sticky-total {
     position: sticky; top: 0; z-index: 99;
     background: linear-gradient(135deg, #8B0000, #CC5500);
@@ -135,6 +150,26 @@
   </div>
   <div class="header-badges">
     <span class="badge">🍽️ Limited Dinner Provided — Idly with Sambar &amp; Chutney · Parotta with Veg Salna · Chicken / Veg Roll · Tea / Coffee · Kesari</span>
+  </div>
+</div>
+
+<!-- Event Details -->
+<div class="event-details">
+  <div class="event-detail-item">
+    <div class="event-detail-icon">📅</div>
+    <div class="event-detail-text"><strong>Date</strong>Sunday, April 26th 2026</div>
+  </div>
+  <div class="event-detail-item">
+    <div class="event-detail-icon">🕑</div>
+    <div class="event-detail-text"><strong>Time</strong>14:00 – 19:00</div>
+  </div>
+  <div class="event-detail-item">
+    <div class="event-detail-icon">📍</div>
+    <div class="event-detail-text"><strong>Venue</strong>Espoo International School<br>Lillhemtintie 1, 02250 Espoo</div>
+  </div>
+  <div class="event-detail-item">
+    <div class="event-detail-icon">🎭</div>
+    <div class="event-detail-text"><strong>Agenda</strong>Tamil cultural events &amp; competitions followed by a delicious dinner</div>
   </div>
 </div>
 
